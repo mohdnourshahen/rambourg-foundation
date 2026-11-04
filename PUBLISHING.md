@@ -34,18 +34,13 @@ Edit those files, then rebuild:
 
 ## Old addresses
 The old WordPress site used addresses like `/arts/`, `/education/`, `/guillaume-rambourg/`.
-These redirects are already in `_redirects` (used by Netlify and Cloudflare Pages); on other hosts, set them up the same way:
+They redirect (301) to the new pages: `/pillars/<slug>/`, `/leadership.html`, and old `pillar.html?p=` / `article.html?n=`
+links to `/pillars/<slug>/` / `/journal/<slug>/`. On Fly.io this is in `nginx.conf`; on Netlify or Cloudflare Pages, `_redirects`.
 
-    /arts/                 /pillar.html?p=arts                 301
-    /cultural-activities/  /pillar.html?p=cultural-activities  301
-    /festivals/            /pillar.html?p=festivals            301
-    /education/            /pillar.html?p=education            301
-    /scholarships/         /pillar.html?p=scholarships         301
-    /human-rights/         /pillar.html?p=human-rights         301
-    /entrepreneurship/     /pillar.html?p=entrepreneurship     301
-    /craftsmanship-2/      /pillar.html?p=craftsmanship        301
-    /sport/                /pillar.html?p=sport                301
-    /guillaume-rambourg    /guillaume.html                     301
+## Hosting on Fly.io (prepared)
+`Dockerfile` + `nginx.conf` + `fly.toml` serve `dist/`; `.github/workflows/fly-deploy.yml` deploys on every push to `main`.
+Steps for the account owner: `fly auth login`, `fly launch --no-deploy` (keep the existing fly.toml), `fly deploy`,
+then `fly tokens create deploy` and save it in GitHub → Settings → Secrets → Actions as `FLY_API_TOKEN`.
 
 ## Writing for the Journal (house style)
 - First person, the foundation's voice ("we"), the person before the foundation.
