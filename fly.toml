@@ -1,6 +1,6 @@
 # Fly.io app for the Rambourg Foundation website (static site served by nginx, see Dockerfile).
 app = "rambourg-foundation"
-primary_region = "lhr"   # London
+primary_region = "ams"   # Amsterdam (where the app was created)
 
 [build]
   dockerfile = "Dockerfile"

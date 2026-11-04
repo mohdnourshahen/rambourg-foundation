@@ -39,14 +39,15 @@ The person working on it writes in Arabic (Jordanian dialect) or English — rep
 - Instagram @rambourg.foundation. Its bio reads: founded in 2011 by Guillaume Rambourg, presided by Sarah Rambourg.
 - Facts used and still to confirm are listed in `PUBLISHING.md`.
 
-## Deployment (prepared, not yet live)
-- `Dockerfile` (nginx:1.27-alpine serving `dist/` on 8080), `nginx.conf` (old WordPress URL redirects, caching, headers),
-  `fly.toml` (app `rambourg-foundation`, London region), `.github/workflows/fly-deploy.yml`
-  (deploys on push to `main` using the `FLY_API_TOKEN` secret).
-- `dist/` is committed because the Docker image copies it. Run `python3 build.py` before pushing.
-- Still to do: create the GitHub repo and the Fly.io app under the owner's account, add `FLY_API_TOKEN`
-  (`fly tokens create deploy`) as a repository secret, push, and point the domain at Fly.
-  The `gh` and `flyctl` CLIs were not installed. The owner signs in themselves.
+## Deployment (live)
+- GitHub: https://github.com/mohdnourshahen/rambourg-foundation (branch `main`). The push token is in the macOS Keychain.
+- Fly.io app `rambourg-foundation` (personal org of moh.dnour36@gmail.com), region ams, live at https://rambourg-foundation.fly.dev.
+  It is linked to the GitHub repo from the Fly dashboard, so a push to `main` redeploys it; `~/.fly/bin/flyctl deploy` also works.
+  Shared IPv4 66.241.125.79 plus a dedicated IPv6.
+- `Dockerfile` (nginx:1.27-alpine serving `dist/` on 8080), `nginx.conf` (old WordPress URL redirects, caching, headers), `fly.toml`.
+- `dist/` is committed because the Docker image copies it: run `python3 build.py` before pushing.
+- Still to do: point rambourg-foundation.com at Fly (`flyctl certs add rambourg-foundation.com`, then DNS records at the registrar).
+  Ignore the Fly dashboard's "merge new files" banner: the repo's fly.toml is the source of truth.
 
 ## Open items
 - A solo portrait of Sarah Rambourg; the date of the home hero photo (`assets/img/events/founder-president-stage.jpg`).
