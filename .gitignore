@@ -1,0 +1,9 @@
+# macOS / exFAT metadata
+._*
+.DS_Store
+# raw archive of the old WordPress site (kept locally, not published)
+old-site/
+# packaged upload and local tooling
+rambourg-foundation-site.zip
+.claude/
+__pycache__/

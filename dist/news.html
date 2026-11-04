@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Journal: News &amp; Stories — Rambourg Foundation</title>
+  <meta name="description" content="News and stories from the Rambourg Foundation: residencies, films, exhibitions and scholarships, plus press coverage of our work since 2011.">
+  <meta name="theme-color" content="#F7F4EE">
+  <link rel="canonical" href="https://rambourg-foundation.com/news.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Rambourg Foundation">
+  <meta property="og:title" content="Journal: News &amp; Stories — Rambourg Foundation">
+  <meta property="og:description" content="News and stories from the Rambourg Foundation: residencies, films, exhibitions and scholarships, plus press coverage of our work since 2011.">
+  <meta property="og:url" content="https://rambourg-foundation.com/news.html">
+  <meta property="og:image" content="https://rambourg-foundation.com/assets/img/events/oscars-2026.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://rambourg-foundation.com/assets/img/events/oscars-2026.jpg">
+  <link rel="icon" href="assets/logo/RF_LetterMark_C.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/logo/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/logo/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preload" href="assets/fonts/RowanOakNF-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <script type="application/ld+json" data-gen>{"@context": "https://schema.org", "@graph": [{"@type": "Blog", "name": "Rambourg Foundation Journal", "url": "https://rambourg-foundation.com/news.html", "publisher": {"@id": "https://rambourg-foundation.com/#org"}, "blogPost": [{"@type": "BlogPosting", "headline": "Ranim AlHalaky completes her residency at Delfina Foundation", "url": "https://rambourg-foundation.com/journal/ranim-al-halaky-delfina-residency/", "datePublished": "2026-05-01"}, {"@type": "BlogPosting", "headline": "The Voice of Hind Rajab at the Oscars", "url": "https://rambourg-foundation.com/journal/hind-rajab-oscar-golden-globe/", "datePublished": "2026-03-01"}, {"@type": "BlogPosting", "headline": "The Voice of Hind Rajab, from Washington DC to Capitol Hill", "url": "https://rambourg-foundation.com/journal/capitol-hill-screening/", "datePublished": "2026-02-01"}, {"@type": "BlogPosting", "headline": "Calling Syrian Artists: a residency in London", "url": "https://rambourg-foundation.com/journal/calling-syrian-artists/", "datePublished": "2025-12-01"}, {"@type": "BlogPosting", "headline": "The Voice of Hind Rajab wins the Silver Lion in Venice", "url": "https://rambourg-foundation.com/journal/silver-lion-venice-2025/", "datePublished": "2025-09-01"}, {"@type": "BlogPosting", "headline": "MARWAN: A Soul in Exile — our partnership with Christie's", "url": "https://rambourg-foundation.com/journal/marwan-a-soul-in-exile/", "datePublished": "2025-07-01"}, {"@type": "BlogPosting", "headline": "The Man Who Sold His Skin, screened in London", "url": "https://rambourg-foundation.com/journal/the-man-who-sold-his-skin-screening/", "datePublished": "2025-05-01"}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://rambourg-foundation.com/"}, {"@type": "ListItem", "position": 2, "name": "Journal", "item": "https://rambourg-foundation.com/news.html"}]}]}</script>
+</head>
+<body data-page="news">
+  <a class="skip" href="#main">Skip to content</a>
+  <main id="main">
+    <section class="nhero">
+      <p class="eyebrow">Journal</p>
+      <h1 data-split>The <em>journal</em></h1>
+      <div class="nhero__row">
+        <p>Stories of the artists, students and films we support — in our own words — and what has been written about our work since 2011.</p>
+        <div class="nhero__links"><a class="link-dot" href="#instagram">From Instagram</a><a class="link-dot" href="#press">In the press</a></div>
+      </div>
+    </section>
+
+    <!-- latest story, large (Stellar featured news) -->
+    <a class="nfeat" id="nfeat"></a>
+
+    <!-- the rest as cards -->
+    <section class="news news--list">
+      <div class="news__head"><h2 data-split>More <em>stories</em></h2><div class="filters filters--light" id="nfilters" role="group" aria-label="Filter stories"></div></div>
+      <div class="news__grid" id="ngrid"></div>
+    </section>
+
+    <!-- From Instagram: recent posts in the site's own style (static; links open Instagram) -->
+    <section class="insta" id="instagram">
+      <div class="news__head"><h2 data-split>From <em>Instagram</em></h2><a class="btn btn--line" href="https://www.instagram.com/rambourg.foundation/" target="_blank" rel="noopener">@rambourg.foundation</a></div>
+      <div class="insta__grid" id="igrid"></div>
+    </section>
+
+    <!-- press archive from the old site: GPG list rows with filter -->
+    <section class="press dark" id="press" data-theme="dark">
+      <div class="press__head">
+        <h2 data-split>In the <em>press</em></h2>
+        <div class="filters" id="pfilters" role="group" aria-label="Filter by pillar"></div>
+      </div>
+      <div id="plist"></div>
+    </section>
+  </main>
+
+  <footer class="footer" data-theme="dark" data-img="assets/img/p_semmama.jpg"></footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="js/data.js"></script>
+  <script>
+    const [first, ...rest] = RF.news;
+    const pillarOf = slug => RF.pillars.find(p => p.slug === slug);
+    const tag = slug => { const p = pillarOf(slug); return p ? `<span class="tag" style="--c:${p.color}">${p.name}</span>` : ""; };
+    const nfeat = document.getElementById("nfeat");
+    nfeat.href = `journal/${first.slug}/`;
+    nfeat.innerHTML = `
+      <div class="nfeat__img"><img src="${first.img}" alt="${first.imgCap || ""}"></div>
+      <div>
+        <div class="ncard__meta"><span>${first.cat}</span><span>${first.date}</span>${tag(first.pillar)}</div>
+        <h2>${first.title}</h2>
+        <p>${first.excerpt}</p>
+        ${first.quote ? `<blockquote class="aquote aquote--sm"><p>“${first.quote[0]}”</p><cite>${first.quote[1]}</cite></blockquote>` : ""}
+        <span class="btn btn--solid">Read the story</span>
+      </div>`;
+    const card = n => `
+      <a class="ncard" href="journal/${n.slug}/" data-cat="${n.cat}" data-reveal>
+        <div class="ncard__img"><img src="${n.img}" alt="${n.title}" loading="lazy"></div>
+        <div class="ncard__meta"><span>${n.cat}</span><span>${n.date}</span>${tag(n.pillar)}</div>
+        <h3><span>${n.title}</span></h3>
+        <p class="ncard__dek">${n.excerpt}</p>
+      </a>`;
+    document.getElementById("ngrid").innerHTML = rest.map(card).join("");
+    const cats = ["All", ...new Set(rest.map(n => n.cat))];
+    document.getElementById("nfilters").innerHTML = cats.map((c, i) => `<button aria-pressed="${i === 0}" data-f="${c}">${c}</button>`).join("");
+    document.getElementById("igrid").innerHTML = RF.instagram.map(([kind, a, b, url, date]) => kind === "img"
+      ? `<a class="itile" href="${url}" target="_blank" rel="noopener"><img src="${a}" alt="${b}" loading="lazy"><span class="itile__cap">${b}<small>${date} · View on Instagram ↗</small></span></a>`
+      : `<a class="itile itile--text" href="${url}" target="_blank" rel="noopener"><p>${a}</p><span class="itile__cap">${b}<small>${date} · View on Instagram ↗</small></span></a>`).join("");
+
+    const colorOf = name => (RF.pillars.find(p => p.name === name) || {});
+    document.getElementById("plist").innerHTML = RF.press.map(p => {
+      const c = colorOf(p.pillar);
+      return `<a class="prow${c.ink ? " ink" : ""}" href="${p.url}" target="_blank" rel="noopener" data-pillar="${p.pillar}" style="--c:${c.color}">
+        <small>${p.date || "Archive"}</small>
+        <small class="prow__src">${p.source} · ${p.lang}${p.archived ? " · archived copy" : ""}</small>
+        <h3${p.lang === "AR" ? ' lang="ar" dir="rtl"' : ""}>${p.title}</h3>
+        <small>${p.pillar}</small>
+        <span class="prow__arrow" aria-hidden="true">↗</span>
+      </a>`;
+    }).join("");
+    const pillars = ["All", ...new Set(RF.press.map(p => p.pillar))];
+    const filters = document.getElementById("pfilters");
+    filters.innerHTML = pillars.map((p, i) => `<button aria-pressed="${i === 0}" data-f="${p}">${p}</button>`).join("");
+  </script>
+  <script src="js/main.js"></script>
+</body>
+</html>

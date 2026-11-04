@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /pillar.html
+Disallow: /article.html
+
+Sitemap: https://rambourg-foundation.com/sitemap.xml
