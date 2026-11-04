@@ -212,12 +212,13 @@ em { color: var(--blue); }
 /* ---------- vertical marquee (GPG industries) ---------- */
 .vmarquee { height: 100svh; display: grid; grid-template-columns: 1fr 1.6fr; overflow: hidden; position: relative; }
 .vmarquee__label { padding: 120px var(--gutter); }
-.vmarquee__label .tag { display: inline-flex; padding: 8px 16px; border: 1px solid var(--line-inv); border-radius: 999px; font-size: 13px; }
+.vmarquee__label .tag { display: inline-flex; padding: 8px 16px; border: 1px solid var(--line-inv); border-radius: 999px; font-size: 13px; color: #fff; }
+.vmarquee__label .tag:hover { background: #fff; color: var(--ink); }
 .vmarquee__label p { margin-top: 28px; max-width: 30ch; opacity: .7; }
-.vmarquee__col { position: relative; -webkit-mask: linear-gradient(transparent, #000 22%, #000 78%, transparent); mask: linear-gradient(transparent, #000 22%, #000 78%, transparent); }
+.vmarquee__col { position: relative; min-height: 0; overflow: hidden; -webkit-mask: linear-gradient(transparent, #000 22%, #000 78%, transparent); mask: linear-gradient(transparent, #000 22%, #000 78%, transparent); }
 .vmarquee__track { animation: vscroll 30s linear infinite; }
 .vmarquee__track span { display: block; font-size: clamp(44px, 6.4vw, 108px); line-height: 1.08; letter-spacing: -.03em; white-space: nowrap; color: rgba(255,255,255,.2); transition: color .4s; }
-.vmarquee__track span:hover { color: #fff; }
+.vmarquee__track span:hover, .vmarquee__track span.is-lit { color: #fff; }
 .vmarquee__track span:nth-child(3n+1) { font-family: var(--serif); font-style: italic; letter-spacing: -.01em; }
 @keyframes vscroll { to { transform: translateY(-50%); } }
 
@@ -426,8 +427,12 @@ em { color: var(--blue); }
   .header__logo { width: 148px; height: 45px; }
   .orbits { grid-template-columns: 1fr; gap: 56px; }
   .orbits__line { display: none; }
-  .vmarquee { grid-template-columns: 1fr; }
-  .vmarquee__label { padding-bottom: 0; }
+  .vmarquee { grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); }
+  .vmarquee__label { padding: 104px var(--gutter) 8px; }
+  .vmarquee__label p { margin-top: 20px; }
+  .vmarquee__col { padding: 0 var(--gutter); }
+  .vmarquee__track { animation-duration: 14s; }
+  .vmarquee__track span { font-size: clamp(38px, 11.5vw, 56px); color: rgba(255,255,255,.28); }
   .news__grid { grid-template-columns: 1fr; }
   .footer__main { grid-template-columns: 1fr; }
   .statement__text { margin: 0; }

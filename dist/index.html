@@ -272,6 +272,19 @@
     document.getElementById("mworks").innerHTML = [0, 1].map(c => `<div class="marwan__col">${c === 0 ? film : `<figure class="work"><div class="work__img"><img src="assets/img/events/marwan-exhibition-1.jpg" alt="A guest at MARWAN: A Soul in Exile, in front of two of his heads" loading="lazy"></div><figcaption>At the exhibition<small>Christie's London, July 2025</small></figcaption></figure>`}${RF.marwan.filter((_, i) => i % 2 === c).map(work).join("")}</div>`).join("");
     const words = ["Cinema", "Visual arts", "Scholarships", "Heritage", "Human rights", "Festivals", "Craft", "Sport", "Young founders", "Music", "Education", "Free expression"];
     document.getElementById("vtrack").innerHTML = [...words, ...words].map(w => `<span>${w}</span>`).join("");
+    // light up the word crossing the middle of the column (touch screens have no hover), only while it's on screen
+    (() => {
+      const col = document.querySelector(".vmarquee__col"), spans = [...document.querySelectorAll("#vtrack span")];
+      let on = false, lit = null;
+      const tick = () => {
+        if (!on) return;
+        const r = col.getBoundingClientRect(), mid = r.top + r.height / 2;
+        const best = spans.reduce((a, s) => { const b = s.getBoundingClientRect(), d = Math.abs(b.top + b.height / 2 - mid); return d < a.d ? { s, d } : a; }, { d: Infinity }).s;
+        if (best !== lit) { lit?.classList.remove("is-lit"); best?.classList.add("is-lit"); lit = best; }
+        requestAnimationFrame(tick);
+      };
+      new IntersectionObserver(([e]) => { on = e.isIntersecting; if (on) tick(); }).observe(col);
+    })();
   </script>
   <script src="js/main.js"></script>
 </body>
