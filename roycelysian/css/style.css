@@ -665,3 +665,8 @@ body{font:300 15.5px/1.75 var(--sans)}
   .bk-stage,.bk-item:first-child .bk-stage{height:270px}
   .bk-coffee,.bk-item:first-child .bk-coffee{width:min(290px,86vw)}
 }
+.ft-mark{display:flex;justify-content:space-between;align-items:center;gap:30px}
+.ft-mark img{width:clamp(200px,26vw,380px);opacity:.9}
+.ft-mark::after{content:"Photography · Branding · Editorial Design";font:400 10px/1.6 var(--sans);font-stretch:125%;letter-spacing:.26em;text-transform:uppercase;opacity:.5;text-align:right}
+.ft-bot span:last-child{display:none}
+@media (max-width:720px){.ft-mark{flex-direction:column;align-items:flex-start}.ft-mark::after{text-align:left}.ft-mark img{width:220px}}
