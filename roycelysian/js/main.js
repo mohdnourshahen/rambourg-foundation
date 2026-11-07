@@ -7,7 +7,7 @@
 
   /* ---------- shell ---------- */
   const NAV = [
-    ['index.html', 'Home', 'zeryab-arcade'], ['work.html', 'Work', 'lazure-hall'], ['expertise.html', 'Expertise', 'riad-salon'],
+    ['index.html', 'Home', 'zeryab-arcade'], ['work.html', 'Work', 'lazure-hall'], ['expertise.html', 'Expertise', 'zeryab-salon'],
     ['publications.html', 'Publications', 'zeryab-niche'], ['studio.html', 'Studio', 'zeryab-statue'], ['contact.html', 'Contact', 'nal-terrace']
   ];
   const C = D.contact;
@@ -60,7 +60,7 @@
 
   /* ---------- page renders ---------- */
   const card = p => `<a class="card" href="project.html?p=${p.slug}">
-      <div class="ph"><img src="${IMG(p.cover, 1)}" alt="${esc(p.name)}, ${esc(p.place)}" loading="lazy"></div>
+      <div class="ph"><img src="${IMG(p.card || p.cover, 1)}" alt="${esc(p.name)}, ${esc(p.place)}" loading="lazy"></div>
       <div class="card-meta"><h3>${esc(p.name)}</h3><span class="label">${esc(p.place.split(',').pop().trim())}</span></div>
       <p>${esc(p.type)}</p></a>`;
 
@@ -97,6 +97,30 @@
       <div class="scope">${p.scope.join(' · ')}</div><span class="btn ghost"><span>View project</span><i></i></span></div></a>`).join('');
   }
 
+  const fig = (g, cls = '', sm) => `<figure class="${cls} rv"><div class="ph rv-img"${g.r ? ` style="aspect-ratio:${g.r}"` : ''}><img src="${IMG(g.img || g, sm)}" alt="${esc(g.cap || '')}" loading="lazy"></div>${g.cap ? `<figcaption>${esc(g.cap)}</figcaption>` : ''}</figure>`;
+  const brandBlock = p => { const b = p.brand; return `
+    <section class="sec wrap dark zb">
+      <div class="grid zb-head">
+        <div class="zb-label rv"><span class="label dim">Brand Identity</span><span class="label">In collaboration with<br>${esc(b.partner)}</span></div>
+        <div class="zb-intro"><h2 class="h2">${b.title}</h2>${b.text.map((t, i) => `<p class="rv${i ? ' d1' : ''}">${esc(t)}</p>`).join('')}</div>
+      </div>
+      ${b.lead ? fig(b.lead, 'zb-lead') : ''}
+      ${b.pair ? `<div class="zb-pair">${b.pair.map(g => fig(g, '', 1)).join('')}</div>` : ''}
+      ${b.palette ? `<div class="grid zb-pal">
+        <div class="zb-pal-t rv"><span class="label dim">Palette</span><p>${esc(b.paletteText)}</p></div>
+        <div class="zb-sw" style="grid-template-columns:repeat(${b.palette.length},1fr)">${b.palette.map((c, i) => `<div class="rv" style="transition-delay:${i * 70}ms"><i style="background:${c}"></i><span class="label">${c}</span></div>`).join('')}</div>
+      </div>` : ''}
+      ${b.textures ? `<div class="zb-tex">${b.textures.map(t => fig(t, '', 1)).join('')}</div>` : ''}
+      ${b.craft ? fig(b.craft, 'zb-lead') : ''}
+      ${b.objects ? `<div class="zb-pair">${b.objects.map(g => fig(g, '', 1)).join('')}</div>` : ''}
+      ${b.extra ? fig(b.extra, 'zb-extra') : ''}
+      <div class="zb-cred rv">
+        ${b.credits.map(c => `<div><span class="label dim">${esc(c[0])}</span><p>${esc(c[1])}</p></div>`).join('')}
+        <a class="btn ghost" href="${b.link}" target="_blank" rel="noopener"><span>Full identity case</span><i></i></a>
+      </div>
+    </section>
+    ${b.close ? `<section class="zb-close"><img src="${IMG(b.close.img)}" alt="${esc(b.close.cap)}" loading="lazy"></section>` : ''}`; };
+
   if (page === 'project') {
     const slug = new URLSearchParams(location.search).get('p');
     const i = Math.max(0, D.projects.findIndex(p => p.slug === slug)), p = D.projects[i], nx = D.projects[(i + 1) % D.projects.length];
@@ -113,6 +137,7 @@
         <div class="pj-meta rv d2"><div><span class="label">Location</span><p>${esc(p.place)}</p></div><div><span class="label">Sector</span><p>${esc(p.type)}</p></div><div><span class="label">Our role</span><p>${p.scope.join('<br>')}</p></div></div>
       </div></div></section>
     ${p.gallery.length ? `<section class="wrap" style="padding-bottom:clamp(96px,14vw,200px)"><div class="pj-gal">${p.gallery.map(g => `<figure class="ph rv-img ${g.f}"><img src="${IMG(g.img)}" alt="${esc(p.name)}" loading="lazy"></figure>`).join('')}</div></section>` : ''}
+    ${p.brand ? brandBlock(p) : ''}
     <a class="pj-next" href="project.html?p=${nx.slug}"><img src="${IMG(nx.cover)}" alt="" loading="lazy">
       <div><span class="label">Next project</span><span class="display" style="font-size:clamp(40px,6vw,96px)">${esc(nx.name)}</span><span class="label dim">${esc(nx.place)}</span></div></a>`;
     if (window.innerWidth < 1000) $('.intro-text-pj').style.gridColumn = '1/-1';
@@ -143,7 +168,7 @@
   /* ---------- header state ---------- */
   const hd = $('#hd');
   let lastY = 0;
-  const tones = $$('.open,.dark,.cta,.phero,.pj-next,.ft');
+  const tones = $$('.open,.dark,.cta,.phero,.pj-next,.ft,.zb-close');
   const onScroll = () => {
     const y = scrollY, th = page === 'home' || document.body.classList.contains('has-hero') ? innerHeight * .8 : 40;
     hd.classList.toggle('solid', page === 'contact' || (y > th && !inArch()));

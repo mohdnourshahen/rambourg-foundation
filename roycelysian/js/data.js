@@ -11,8 +11,8 @@ window.RY = {
   },
 
   hero: [
-    { img: 'zeryab-arcade', caption: 'Zeryab Estates', place: 'Marrakech, Morocco' },
-    { img: 'lazure-hall', caption: "Royal L'azure Resort", place: 'Neom, Saudi Arabia' },
+    { img: 'zeryab-pool', caption: 'Zeryab Estates', place: 'Marrakech, Morocco' },
+    { img: 'lazure-hall', caption: "Royal L'Azure Resort", place: 'Tabuk, Saudi Arabia' },
     { img: 'nal-terrace', caption: 'Nal Vila', place: 'Ibiza, Spain' },
     { img: 'skyline-view', caption: 'The Skyline Residences', place: 'Amman, Jordan' },
     { img: 'riad-garden', caption: 'Riad Elhob', place: 'Marrakech, Morocco' }
@@ -26,15 +26,46 @@ window.RY = {
       type: 'Private Estate',
       title: 'A Sanctuary of Elegance and Tranquility',
       line: 'Where art and symmetry define sophistication.',
-      intro: 'Zeryab Estates is composed like a gallery: long arcades, carved cedar ceilings, and rooms where art and architecture keep the same quiet discipline. We approached it the way it was built, with patience, symmetry and an eye for the details that give a place its character.',
-      scope: ['Architectural Photography', 'Interiors', 'Retouching & Colour Grading'],
-      cover: 'zeryab-arcade',
+      intro: 'A private luxury retreat in Marrakech, where Andalusian, Berber and Arab culture meet in something singular. Long arcades, carved cedar, still water and rooms where art and architecture keep the same quiet discipline. We photographed the estate the way it was built, with patience and symmetry, and the brand identity was created in collaboration with Lōn Visuals.',
+      scope: ['Architectural & Interior Photography', 'Retouching & Colour Grading', 'Brand Identity, with Lōn Visuals'],
+      cover: 'zeryab-pool',
+      card: 'zeryab-arcade',
       gallery: [
+        { img: 'zeryab-gate', f: 'wide' },
         { img: 'zeryab-arches', f: 'tall' },
         { img: 'zeryab-niche', f: 'tall' },
-        { img: 'zeryab-ceiling', f: 'wide' },
-        { img: 'zeryab-statue', f: 'center' }
-      ]
+        { img: 'zeryab-salon', f: 'wide' },
+        { img: 'zeryab-statue', f: 'tall' },
+        { img: 'zeryab-ceiling', f: 'tall', fit: 'cover' }
+      ],
+      brand: {
+        partner: 'Lōn Visuals',
+        link: 'https://lonvisuals.com/work/zeryab-estates',
+        title: 'Heritage, <em>reimagined</em>',
+        text: [
+          'Alongside the photography, the identity of Zeryab Estates was developed in collaboration with Lōn Visuals. The brief called for an identity that could carry centuries of culture without collapsing under its weight, and speak to an international audience while staying rooted in its place.',
+          'The mark brings together two of Morocco’s most enduring forms, the Moorish arch and the interlocking geometry of zellige, in one architectural emblem. A wide-tracked wordmark gives the name the presence of an inscription.'
+        ],
+        lead: { img: 'zb-painting', cap: 'The identity over a Moroccan heritage painting' },
+        pair: [
+          { img: 'zb-arches', cap: 'Inspiration · The Moorish arch' },
+          { img: 'zb-zellige', cap: 'Inspiration · Zellige geometry' }
+        ],
+        paletteText: 'Six tones taken from Marrakech: the navy of tile shadow, the umber of cedarwood, the gold of brass lanterns, the tan of sun-dried clay, handmade terracotta and poured iron.',
+        palette: ['#162930', '#544124', '#896A22', '#C8945B', '#6C2D1B', '#9E3A26'],
+        textures: ['zb-terra', 'zb-teal', 'zb-gold'],
+        craft: { img: 'zb-emboss', cap: 'Foil emboss on luxury paper' },
+        objects: [
+          { img: 'zb-towel', cap: 'Textiles' },
+          { img: 'zb-diffuser', cap: 'Amenities' }
+        ],
+        close: { img: 'zb-interior', cap: 'The brand in its setting' },
+        credits: [
+          ['Photography', 'Roycelysian'],
+          ['Brand Identity & Art Direction', 'Lōn Visuals'],
+          ['Year', '2026']
+        ]
+      }
     },
     {
       slug: 'riad-elhob',
@@ -47,8 +78,7 @@ window.RY = {
       scope: ['Hospitality Photography', 'Interiors', 'Retouching & Colour Grading'],
       cover: 'riad-garden',
       gallery: [
-        { img: 'riad-library', f: 'wide' },
-        { img: 'riad-salon', f: 'wide' }
+        { img: 'riad-library', f: 'wide' }
       ]
     },
     {
@@ -79,23 +109,50 @@ window.RY = {
     },
     {
       slug: 'royal-lazure',
-      name: "Royal L'azure Resort",
-      place: 'Neom, Saudi Arabia',
-      type: 'Resort',
+      name: "Royal L'Azure Resort",
+      place: 'Tabuk, Saudi Arabia',
+      type: "Resort · L'Azure Hospitality",
       title: 'Capturing the Essence of Exclusivity',
-      line: 'Symmetry, light and repose.',
-      intro: 'Arches, reflections and a measured, almost ceremonial symmetry. We photographed the public spaces of the resort to hold that calm, letting the architecture set the rhythm of every frame.',
-      scope: ['Hospitality Photography', 'Interiors', 'Retouching & Colour Grading'],
+      line: 'Symmetry, light and repose on the Red Sea coast.',
+      intro: "Royal L'Azure belongs to L'Azure Hospitality, a premium hotel group on the Saudi Red Sea coast. Arches, reflections and a measured, almost ceremonial symmetry: we photographed the resort's spaces to hold that calm, and the group's identity was created in collaboration with Lōn Visuals.",
+      scope: ['Hospitality & Interior Photography', 'Retouching & Colour Grading', 'Brand Identity & Website, with Lōn Visuals'],
       cover: 'lazure-hall',
       gallery: [
         { img: 'lazure-salon', f: 'wide' }
-      ]
+      ],
+      brand: {
+        partner: 'Lōn Visuals',
+        link: 'https://lonvisuals.com/work/lazure',
+        title: 'Where the sea <em>meets luxury</em>',
+        text: [
+          "For L'Azure Hospitality, the group behind Royal L'Azure and Sharma Resort, the identity was developed in collaboration with Lōn Visuals: one system to evoke the calm of water, the warmth of sand and the depth of the sea.",
+          'It is built around a fluid wave symbol that holds movement and calm at once, carried from embossed stationery and room keys to the welcome kit and the group’s website.'
+        ],
+        lead: { img: 'lz-coast', cap: 'The wordmark over the Red Sea coastline', r: '2.9/1' },
+        pair: [
+          { img: 'lz-lobby', cap: 'Lobby visual and room key cards', r: '16/10' },
+          { img: 'lz-wave', cap: 'The wave symbol', r: '16/10' }
+        ],
+        paletteText: 'Dark blue against tan gold, deep water against warm sand, held together by a deeper navy, black and white.',
+        palette: ['#506580', '#D8BA9E', '#3D506A', '#111111', '#F8F8F8'],
+        craft: { img: 'lz-kit', cap: 'Welcome kit and amenities', r: '3/2' },
+        objects: [
+          { img: 'lz-cards', cap: 'Business cards', r: '4/3' },
+          { img: 'lz-envelopes', cap: 'Stationery', r: '4/3' }
+        ],
+        extra: { img: 'lz-web', cap: 'lazurehospitality.com', r: '4/3' },
+        credits: [
+          ['Photography', 'Roycelysian'],
+          ['Brand Identity & Website', 'Lōn Visuals'],
+          ['Year', '2024']
+        ]
+      }
     }
   ],
 
   expertise: [
     {
-      n: '01', name: 'Photography & Film', slug: 'photography', img: 'riad-salon',
+      n: '01', name: 'Photography & Film', slug: 'photography', img: 'zeryab-salon',
       lead: 'Editorial-standard imagery, built on light, composition, colour and the feeling of a place.',
       items: ['Architectural', 'Interiors & Exteriors', 'Hospitality', 'Commercial', 'Lifestyle', 'Aerial', 'Film', 'Retouching & Colour Grading']
     },
