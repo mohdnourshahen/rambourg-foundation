@@ -168,7 +168,7 @@
   /* ---------- header state ---------- */
   const hd = $('#hd');
   let lastY = 0;
-  const tones = $$('.open,.dark,.cta,.phero,.pj-next,.ft,.zb-close');
+  const tones = $$('.open,.dark,.forest,.cta,.phero,.pj-next,.ft,.zb-close');
   const onScroll = () => {
     const y = scrollY, th = page === 'home' || document.body.classList.contains('has-hero') ? innerHeight * .8 : 40;
     hd.classList.toggle('solid', page === 'contact' || (y > th && !inArch()));
@@ -272,13 +272,13 @@
     const cx = document.createElement('span'); cx.className = 'cx' + (al === 'center' ? ' c' : al === 'right' ? ' r' : ''); cx.setAttribute('aria-hidden', 'true');
     while (el.firstChild) cx.appendChild(el.firstChild);
     el.appendChild(cx);
-    if (!el.closest('.exp-row') && !el.closest('.wl-item')) { splitText(cx); el.classList.remove('rv'); el.classList.add('split'); if (el.closest('.phero')) el.style.setProperty('--d', '250ms'); }
+    if (!el.closest('.exp-row') && !el.closest('.wl-item')) { splitText(cx); el.classList.remove('rv'); el.classList.add('sx'); if (el.closest('.phero')) el.style.setProperty('--d', '250ms'); }
   });
   $$('.menu nav a').forEach(a => { const s = a.lastChild; if (s && s.nodeType === 3) { const sp = document.createElement('span'); sp.className = 'cx'; sp.textContent = s.textContent; s.replaceWith(sp); } });
 
   /* ---------- reveals ---------- */
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -10% 0px' });
-  $$('.rv,.rv-img,.split').forEach(el => io.observe(el));
+  $$('.rv,.rv-img,.sx').forEach(el => io.observe(el));
 
   /* ---------- parallax on cta ---------- */
   const px = $$('[data-parallax]');
