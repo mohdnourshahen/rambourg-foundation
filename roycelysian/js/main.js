@@ -12,7 +12,7 @@
   ];
   const C = D.contact;
   document.body.insertAdjacentHTML('afterbegin', `
-  <header class="hd" id="hd">
+  <header class="hd${page === 'home' ? ' off nologo' : ''}" id="hd">
     <button class="hd-menu" id="openMenu" aria-label="Open menu"><b></b><span class="label">Menu</span></button>
     <a class="hd-logo" href="index.html" aria-label="Roycelysian home">
       <img class="lt" src="assets/brand/wordmark-ivory.png" alt="Roycelysian" width="614" height="63">
@@ -143,32 +143,49 @@
   /* ---------- header state ---------- */
   const hd = $('#hd');
   let lastY = 0;
-  const tones = $$('.hero,.arch,.dark,.cta,.phero,.pj-next,.ft');
+  const tones = $$('.open,.dark,.cta,.phero,.pj-next,.ft');
   const onScroll = () => {
     const y = scrollY, th = page === 'home' || document.body.classList.contains('has-hero') ? innerHeight * .8 : 40;
     hd.classList.toggle('solid', page === 'contact' || (y > th && !inArch()));
     const hy = hd.offsetHeight / 2, under = tones.find(t => { const r = t.getBoundingClientRect(); return r.top <= hy && r.bottom > hy; });
     hd.classList.toggle('tone-light', !under);
+    if (openEl) hd.classList.toggle('nologo', openEl.getBoundingClientRect().bottom > hd.offsetHeight);
     hd.classList.toggle('hide', y > lastY && y > innerHeight * 1.2 && !menu.classList.contains('open'));
     lastY = y;
     arch(); rail();
   };
 
-  /* ---------- arch reveal (home) ---------- */
-  const archEl = $('.arch'), win = $('.arch-win'), head = $('.arch-head'), flank = $('.arch-flank'), aCap = $('.arch-cap');
-  function inArch() { if (!archEl) return false; const r = archEl.getBoundingClientRect(); return r.top <= 0 && r.bottom > innerHeight; }
+  /* ---------- opening (home) ---------- */
+  const openEl = $('#open'), win = $('#openWin'), rings = $$('.open-ring'), oTitle = $('#openTitle'),
+        oBg = $('.open-bg'), oFrame = $('.open-frame'), oFoot = $('.open-foot'), oMono = $('.open-mono'), oUi = $('#openUi'), oScript = $('.open-script');
+  let openP = 0;
+  function inArch() { return false; }
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v)), seg = (p, a, b) => clamp((p - a) / (b - a)),
+        eio = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2, eo = t => 1 - Math.pow(1 - t, 3);
   function arch() {
-    if (!archEl) return;
-    const r = archEl.getBoundingClientRect(), total = r.height - innerHeight;
-    const p = Math.min(1, Math.max(0, -r.top / total));
-    const e = p < .1 ? 0 : Math.min(1, (p - .1) / .7), k = 1 - Math.pow(1 - e, 3);
-    const mob = innerWidth <= 720, w0 = innerWidth * (mob ? .62 : .26), h0 = innerHeight * (mob ? .52 : .44);
-    const w = w0 + (innerWidth - w0) * k, h = h0 + (innerHeight - h0) * k, rad = (w0 / 2) * (1 - k);
-    win.style.width = w + 'px'; win.style.height = h + 'px';
-    win.style.borderRadius = `${rad}px ${rad}px 0 0`; win.style.outlineColor = `rgba(243,240,232,${.16 * (1 - k)})`;
-    head.style.opacity = 1 - Math.min(1, k * 1.8); head.style.transform = `translateY(${-k * 60}px)`;
-    if (flank) { flank.style.opacity = 1 - Math.min(1, k * 2.2); flank.style.letterSpacing = 0; flank.style.padding = `0 calc(var(--gut) + ${3 - k * 3}vw)`; }
-    const c = Math.max(0, (p - .82) / .14); aCap.style.opacity = Math.min(1, c); aCap.style.transform = `translateY(${(1 - Math.min(1, c)) * 20}px)`;
+    if (!openEl) return;
+    const r = openEl.getBoundingClientRect(), total = r.height - innerHeight;
+    const p = openP = clamp(-r.top / total);
+    const W = innerWidth, H = innerHeight, mob = W <= 720;
+    const w0 = mob ? W * .74 : Math.min(W * .3, H * .56), h0 = mob ? H * .6 : H * .8;
+    const rise = eo(seg(p, 0, .32)), grow = eio(seg(p, .3, .7));
+    const w = w0 + (W - w0) * grow, h = h0 + (H - h0) * grow, rad = (w0 / 2) * (1 - grow);
+    const ty = (1 - rise) * (h0 + 40);
+    const set = (el, ww, hh, rr, op) => { el.style.width = ww + 'px'; el.style.height = hh + 'px'; el.style.borderRadius = `${rr}px ${rr}px 0 0`; el.style.transform = `translate(-50%, ${ty}px)`; if (op !== undefined) el.style.opacity = op; };
+    set(win, w, h, rad);
+    const ro = (1 - grow) * .9;
+    rings.forEach((g, i) => { const o = (i + 1) * (mob ? 12 : 18); set(g, w + o * 2, h + o, rad + o, ro); });
+    oFrame.style.opacity = 1 - seg(p, .36, .62);
+    oBg.style.opacity = 1 - seg(p, .05, .34);
+    oFoot.style.opacity = 1 - seg(p, .02, .14);
+    oMono.style.opacity = .9 * (1 - seg(p, .2, .4));
+    // title drifts up once the arch has filled the screen
+    const up = eio(seg(p, .62, .92)), th = oTitle.offsetHeight, topTarget = mob ? H * .15 : H * .11;
+    const off = (H / 2 - topTarget - th / 2) * up;
+    oTitle.style.transform = `translateY(calc(-50% - ${off}px)) scale(${1 - up * .12})`;
+    const u = seg(p, .74, .9);
+    oUi.style.opacity = u; oUi.style.transform = `translateY(${(1 - u) * 20}px)`; oUi.classList.toggle('on', u > .5);
+    hd.classList.toggle('off', p < .72);
   }
 
   /* ---------- drag rail ---------- */
@@ -200,9 +217,43 @@
     (function loop() { x += (tx - x) * .14; y += (ty - y) * .14; fl.style.left = x + 'px'; fl.style.top = y + 'px'; requestAnimationFrame(loop); })();
   }
 
+  /* ---------- condensed display + letter split ---------- */
+  const logo = $('.open-logo');
+  if (logo) {
+    const t = logo.textContent, mid = (t.length - 1) / 2;
+    logo.innerHTML = [...t].map((ch, i) => `<span class="ch" style="--d:${(450 + Math.abs(i - mid) * 85) | 0}ms">${ch}</span>`).join('');
+  }
+  const splitText = el => {
+    let k = 0;
+    const walk = n => [...n.childNodes].forEach(c => {
+      if (c.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        c.textContent.split(/(\s+)/).forEach(part => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
+          const w = document.createElement('span'); w.className = 'wd';
+          [...part].forEach(ch => { const s = document.createElement('span'); s.className = 'ch'; s.textContent = ch; s.style.setProperty('--i', Math.min(k++, 34)); w.appendChild(s); });
+          frag.appendChild(w);
+        });
+        c.replaceWith(frag);
+      } else if (c.nodeType === 1 && c.tagName !== 'BR') walk(c);
+    });
+    walk(el);
+  };
+  $$('.display,.h2,.exp-row h3,.wl-t h2').forEach(el => {
+    if (el.closest('.open')) return;
+    el.setAttribute('aria-label', el.textContent.replace(/\s+/g, ' ').trim());
+    const al = getComputedStyle(el).textAlign;
+    const cx = document.createElement('span'); cx.className = 'cx' + (al === 'center' ? ' c' : al === 'right' ? ' r' : ''); cx.setAttribute('aria-hidden', 'true');
+    while (el.firstChild) cx.appendChild(el.firstChild);
+    el.appendChild(cx);
+    if (!el.closest('.exp-row') && !el.closest('.wl-item')) { splitText(cx); el.classList.remove('rv'); el.classList.add('split'); if (el.closest('.phero')) el.style.setProperty('--d', '250ms'); }
+  });
+  $$('.menu nav a').forEach(a => { const s = a.lastChild; if (s && s.nodeType === 3) { const sp = document.createElement('span'); sp.className = 'cx'; sp.textContent = s.textContent; s.replaceWith(sp); } });
+
   /* ---------- reveals ---------- */
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -10% 0px' });
-  $$('.rv,.rv-img').forEach(el => io.observe(el));
+  $$('.rv,.rv-img,.split').forEach(el => io.observe(el));
 
   /* ---------- parallax on cta ---------- */
   const px = $$('[data-parallax]');
@@ -214,12 +265,8 @@
   onScroll(); parallax();
 
   /* ---------- load + page transitions ---------- */
-  const loader = $('.loader');
-  const start = () => requestAnimationFrame(() => document.documentElement.classList.add('ready'));
-  if (loader) {
-    if (sessionStorage.getItem('ry-seen')) { loader.remove(); start(); }
-    else { try { sessionStorage.setItem('ry-seen', 1); } catch (e) {} setTimeout(() => { document.documentElement.classList.add('loaded'); setTimeout(start, 350); setTimeout(() => loader.remove(), 1400); }, 1300); }
-  } else start();
+  const start = () => requestAnimationFrame(() => { document.documentElement.classList.add('ready', 'go'); });
+  (document.fonts && document.fonts.ready ? Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 1800))]) : Promise.resolve()).then(() => setTimeout(start, 120));
 
   document.addEventListener('click', e => {
     const a = e.target.closest('a'); if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey || a.target === '_blank') return;

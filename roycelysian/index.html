@@ -10,48 +10,46 @@
 <meta property="og:image" content="assets/img/zeryab-arcade.jpg">
 <link rel="icon" href="assets/brand/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,300;100,400;125,400;125,500&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Monsieur+La+Doulaise&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/MillerBannerLight.ttf" as="font" type="font/ttf" crossorigin>
 <link rel="stylesheet" href="css/style.css">
 <link rel="preload" as="image" href="assets/img/zeryab-arcade.jpg">
 </head>
 <body data-page="home">
 
-<div class="loader"><img src="assets/brand/monogram-ivory.png" alt=""></div>
-
 <main>
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-slides" id="heroSlides"></div>
-    <div class="hero-in">
-      <h1 class="display">
-        <span class="l1"><span class="w"><span>Exceptional</span></span> <span class="w"><span>Places.</span></span></span>
-        <span class="l2"><span class="w"><span><em>Distinctive</em></span></span> <span class="w"><span>Stories.</span></span></span>
-      </h1>
-      <div class="hero-sub">
-        <p>Photography, branding and editorial design for exceptional properties and premium brands.</p>
-        <a class="btn ghost" href="work.html"><span>Selected Work</span><i></i></a>
-      </div>
-    </div>
-    <div class="hero-bar">
-      <div class="hero-cap" id="heroCap"></div>
-      <div class="hero-dots" id="heroDots"></div>
-      <div class="hero-scroll label">Scroll<i></i></div>
-    </div>
-  </section>
+  <!-- OPENING -->
+  <section class="open" id="open" aria-label="Roycelysian">
+    <div class="open-stick">
+      <div class="open-bg" aria-hidden="true"><span>Roycelysian</span></div>
+      <div class="open-frame"></div>
+      <img class="open-mono" src="assets/brand/monogram-ivory.png" alt="">
 
-  <!-- ARCH -->
-  <section class="arch" aria-label="Philosophy">
-    <div class="arch-stick">
-      <div class="frame"></div>
-      <div class="arch-head">
-        <span class="label dim">Our philosophy</span>
-        <p class="statement">Every place has a character. <em>Every brand has a story.</em></p>
+      <div class="open-ring r2"></div><div class="open-ring r1"></div>
+      <div class="open-win" id="openWin">
+        <div class="hero-slides" id="heroSlides"></div>
       </div>
-      <div class="arch-flank"><span class="label">Photography</span><span class="label">Branding</span></div>
-      <div class="arch-win"><img src="assets/img/zeryab-statue.jpg" alt="Arcade at Zeryab Estates, Marrakech" loading="lazy"></div>
-      <div class="arch-cap">
-        <p class="h3">We believe both deserve to be presented with clarity, creativity and care.</p>
-        <span class="label">Zeryab Estates — Marrakech</span>
+
+      <div class="open-title" id="openTitle">
+        <div class="open-flank l">Exceptional <br>Places</div>
+        <div class="open-mark">
+          <h1 class="open-logo" aria-label="Roycelysian, creative studio">ROYCELYSIAN</h1>
+          <span class="open-script" aria-hidden="true">Studio</span>
+        </div>
+        <div class="open-flank r">Distinctive <br>Stories</div>
+      </div>
+
+      <div class="open-foot"><i></i><span class="label">Photography · Branding · Editorial Design</span></div>
+
+      <div class="open-ui" id="openUi">
+        <div class="open-ui-l">
+          <p>Photography, branding and editorial design for exceptional properties and premium brands.</p>
+          <a class="btn ghost" href="work.html"><span>Selected Work</span><i></i></a>
+        </div>
+        <div class="open-ui-r">
+          <div class="hero-cap" id="heroCap"></div>
+          <div class="hero-dots" id="heroDots"></div>
+        </div>
       </div>
     </div>
   </section>
