@@ -572,3 +572,9 @@ body{font:300 15.5px/1.75 var(--sans)}
 
 .zb-extra{width:min(100%,1040px);margin:0 auto}
 @media (max-width:720px){.zb-sw{grid-template-columns:repeat(3,1fr)!important}}
+
+.pj-meta{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+.pj-gal .half{grid-column:span 6;aspect-ratio:3/2}
+@media (max-width:720px){.pj-gal .half{grid-column:1/-1}}
+.pj-next div{text-align:center}
+.pj-next .display{display:block}

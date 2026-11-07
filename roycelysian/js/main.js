@@ -134,7 +134,7 @@
       <div style="grid-column:4/13" class="intro-text-pj">
         <h2 class="statement rv">${esc(p.title)}</h2>
         <p class="lead rv d1" style="margin-top:36px">${esc(p.intro)}</p>
-        <div class="pj-meta rv d2"><div><span class="label">Location</span><p>${esc(p.place)}</p></div><div><span class="label">Sector</span><p>${esc(p.type)}</p></div><div><span class="label">Our role</span><p>${p.scope.join('<br>')}</p></div></div>
+        <div class="pj-meta rv d2"><div><span class="label">Location</span><p>${esc(p.place)}</p></div>${p.client ? `<div><span class="label">Client</span><p>${esc(p.client)}</p></div>` : ''}<div><span class="label">Sector</span><p>${esc(p.type)}</p></div><div><span class="label">Our role</span><p>${p.scope.join('<br>')}</p></div></div>
       </div></div></section>
     ${p.gallery.length ? `<section class="wrap" style="padding-bottom:clamp(96px,14vw,200px)"><div class="pj-gal">${p.gallery.map(g => `<figure class="ph rv-img ${g.f}"><img src="${IMG(g.img)}" alt="${esc(p.name)}" loading="lazy"></figure>`).join('')}</div></section>` : ''}
     ${p.brand ? brandBlock(p) : ''}

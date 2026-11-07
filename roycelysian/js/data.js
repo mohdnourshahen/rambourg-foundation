@@ -100,12 +100,17 @@ window.RY = {
       name: 'The Skyline Residences',
       place: 'Amman, Jordan',
       type: 'Branded Residences · Serviced by W Amman',
+      client: 'Eagle Hills',
       title: 'A View of Prestige, A Life of Refinement',
       line: 'Amman, seen from above.',
-      intro: 'High above the city, the residences are defined by the view they frame. Our images place the interior and the skyline in the same composition, so the life inside and the city beyond read as one experience.',
-      scope: ['Interior Photography', 'Lifestyle', 'Retouching'],
-      cover: 'skyline-view',
-      gallery: []
+      intro: 'High above the city, the residences are defined by the view they frame. For Eagle Hills, we photographed the interiors and the skyline as one composition, so the life inside and the city beyond read as a single experience: warm light, curated furniture and Amman stretching to the horizon.',
+      scope: ['Interior & Lifestyle Photography', 'Retouching & Colour Grading'],
+      cover: 'skyline-living',
+      gallery: [
+        { img: 'skyline-dining', f: 'wide' },
+        { img: 'skyline-sofa', f: 'half' },
+        { img: 'skyline-table', f: 'half' }
+      ]
     },
     {
       slug: 'royal-lazure',
