@@ -7,9 +7,9 @@ window.RF = {
       facts: [["300", "artworks restored for L'Éveil d'une Nation"], ["45,000", "visitors in three months"], ["3", "editions of the Contemporary Art Prize"], ["150+", "works by Marwan at Christie's London"]],
       intro: "Art tells a country who it is. We restored and showed 300 works from the Ksar Saïd collection, produced films and ran a prize for contemporary art — and today we back artists through open calls and residencies.",
       items: [
-        ["L'Éveil d'une Nation — <span lang=\"ar\">عـهـد الأمــــان</span>", "An exhibition at the Palais Ksar Saïd, Tunis (from 27 Nov 2016), curated by Ridha Moumni: 300 artworks restored and shown to the Tunisian public, 45,000 visitors over three months and 300,000 more on social networks. <a class=\"link-dot\" href=\"eveil.html\">Discover the exhibition</a>", "assets/img/eveil/old-salon2.jpg"],
+        ["L'Éveil d'une Nation — <span lang=\"ar\">عـهـد الأمــــان</span>", "An exhibition at the Palais Ksar Saïd, Tunis (from 27 Nov 2016): 300 artworks restored and shown to the Tunisian public, 45,000 visitors over three months and 300,000 more on social networks. <a class=\"link-dot\" href=\"eveil.html\">Discover the exhibition</a>", "assets/img/eveil/old-salon2.jpg"],
         ["Rambourg Foundation Prize for Contemporary Art", "Three editions, in 2017, 2019 and 2021. The best art projects were rewarded and funded by a senior, international jury.", "assets/img/gallery/arts-002.jpg"],
-        ["Papa Hedi, The Man Behind The Microphone", "A documentary directed by Claire Belhassine, granddaughter of Hedi Jouini, released in August 2017. The foundation also produced the short film Dido: First Queen of Carthage.", "assets/img/projects/papa-hedi.jpg"],
+        ["Papa Hedi, The Man Behind The Microphone", "A documentary about Hedi Jouini, one of the great voices of Tunisian music, released in August 2017. The foundation also produced the short film Dido: First Queen of Carthage.", "assets/img/projects/papa-hedi.jpg"],
         ["Calling Syrian Artists", "An open call and residency for Syrian artists at Delfina Foundation, London, with Madad Art Foundation. Ranim AlHalaky was selected for the 2026 winter residency.", "assets/img/02_Calling_Syrian_Artists.jpg"],
         ["MARWAN: A Soul in Exile", "Partner of Christie's 2025 summer exhibition in London: over 150 works by the Syrian artist Marwan (1934–2016).", "assets/img/marwan/01-kopf-1975.jpg"]
       ] },
@@ -103,10 +103,10 @@ window.RF = {
       text: "Sam Ali, a young Syrian who fled the war to Lebanon, lets a famous contemporary artist tattoo his back to win a visa to Europe and the woman he loves — and becomes a work of art himself, confronting the price of freedom in a world of borders and markets. In May 2025 the foundation hosted a screening at Ciné Lumière, London, with the director and producer Nadim Cheikhrouha.",
       stills: [],
       news: "the-man-who-sold-his-skin-screening" },
-    { slug: "papa-hedi", title: "Papa Hedi, The Man Behind The Microphone", year: "2017", by: "Claire Belhassine",
+    { slug: "papa-hedi", title: "Papa Hedi, The Man Behind The Microphone", year: "2017", by: "",
       role: "Produced by the Rambourg Foundation", poster: "assets/img/projects/papa-hedi.jpg",
       honours: ["Released August 2017"],
-      text: "A documentary by Claire Belhassine about her grandfather Hedi Jouini, one of the great voices of Tunisian music — and about the family story behind the microphone.",
+      text: "A documentary about Hedi Jouini, one of the great voices of Tunisian music — and the family story behind the microphone.",
       stills: [] },
     { slug: "dido", title: "Dido: First Queen of Carthage", year: "", by: "",
       role: "Short film produced by the Rambourg Foundation", poster: "",
@@ -180,9 +180,8 @@ window.RF = {
       body: [
         "We were immensely proud to partner with Christie's on its summer exhibition MARWAN: A Soul in Exile — some 150 powerful, deeply moving works by the iconic Syrian artist Marwan (1934–2016), alongside a number of esteemed partners.",
         "Born in Damascus, Marwan moved to Germany in the late 1950s and became renowned for his study of the head: faces that become landscapes of the soul. The exhibition traced his career from his early figurations to the facial landscapes and Marionette series — paintings, works on paper and editions from 1953 to 2014, lent by museums, foundations and collections across Europe and the Middle East.",
-        "Curated by Dr Ridha Moumni, Chairman of Christie's Middle East and Africa — who also curated our exhibition L'Éveil d'une Nation in Tunis in 2016 — it ran at Christie's, 8 King Street, London, from 16 July to 22 August 2025."
+        "Presented by Christie's, the exhibition ran at Christie's, 8 King Street, London, from 16 July to 22 August 2025."
       ],
-      quote: ["MARWAN was a singular voice in modern and contemporary art.", "Dr Ridha Moumni, curator"],
       link: ["The exhibition on christies.com", "https://www.christies.com/en/events/marwan-exhibition-a-soul-in-exile"],
       photos: [["assets/img/events/marwan-exhibition-1.jpg", "In front of Marwan's heads"], ["assets/img/events/marwan-exhibition-2.jpg", "Beside a Marwan portrait"], ["assets/img/events/marwan-exhibition-3.jpg", "At the opening"]],
       youtube: ["V6bkvvnoOpc", 0, "Inside the exhibition — the designer's take", "Film: Christie's"],
@@ -200,33 +199,6 @@ window.RF = {
       link: ["The screening at Institut Français", "https://www.institut-francais.org.uk/cinema/the-man-who-sold-his-skin/"] }
   ],
 
-  // Our people (people.html): those the foundation has supported or worked with. [name, line, image, link]
-  // Only use a photo of the person themselves; leave "" to show their initials.
-  people: [
-    { group: "Artists & filmmakers", items: [
-      ["Ranim AlHalaky", "Syrian artist · Delfina Foundation residency, winter 2026", "assets/img/events/delfina-visit-2026.jpg", "journal/ranim-al-halaky-delfina-residency/"],
-      ["Kaouther Ben Hania", "Director of The Voice of Hind Rajab and The Man Who Sold His Skin", "assets/img/04b_Silver_Lion_Photo.jpg", "films.html"],
-      ["Claire Belhassine", "Director of Papa Hedi, The Man Behind The Microphone (2017)", "", "films.html#papa-hedi"],
-      ["Ridha Moumni", "Curator of L'Éveil d'une Nation (2016) and MARWAN: A Soul in Exile (2025)", "", "eveil.html"]
-    ] },
-    { group: "Scholars", items: [
-      ["Achref Aouadi", "Full scholarship · Harvard Kennedy School, Mid-Career MPA 2024", "", "pillars/scholarships/"],
-      ["Three Tunisian women", "The Rambourg Fellowship · Columbia University SIPA", "", "pillars/scholarships/"],
-      ["Mariem Snoussi", "Support for her studies at Smith College", "", "pillars/scholarships/"],
-      ["Adam Bouchaala", "Support for his studies at Imperial College London", "", "pillars/scholarships/"],
-      ["Ghofrane Miladi", "Young violinist · Yehudi Menuhin School", "", "pillars/scholarships/"]
-    ] },
-    { group: "Athletes", items: [
-      ["Alaa Trifi", "Tennis · full scholarship at the Académie Mouratoglou, 2018–2024", "assets/img/gallery/sport-057.jpg", "pillars/sport/"],
-      ["Oussama Mellouli", "Olympic champion swimmer, Tunisia", "assets/img/gallery/sport-066.jpg", "pillars/sport/"],
-      ["Champ'Seed players", "Young tennis talent supported on their way up", "assets/img/gallery/sport-063.jpg", "pillars/sport/"]
-    ] },
-    { group: "Communities", items: [
-      ["Adnen Helali", "Shepherd-poet and director of the Centre Culturel de Jbel Semmama", "assets/img/p_semmama.jpg", "pillars/cultural-activities/"],
-      ["The women of Jbel Semmama", "Rugs, baskets and mountain produce at the Jbel Semmama market", "assets/img/projects/semmama-market.jpg", "pillars/cultural-activities/"],
-      ["30 craftsmen, 11 regions", "La Main Tunisienne and the support programme with ONAT", "assets/img/projects/la-main-tunisienne-designs.jpg", "pillars/craftsmanship/"]
-    ] }
-  ],
 
   // From Instagram: [kind, image or text, caption, post url, date] — update by hand, newest first.
   instagram: [

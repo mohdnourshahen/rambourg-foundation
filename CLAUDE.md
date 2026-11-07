@@ -13,8 +13,8 @@ The person working on it writes in Arabic (Jordanian dialect) or English — rep
 
 ## Structure
 - Static HTML/CSS/JS. GSAP 3.12.5 + ScrollTrigger (cdnjs), Lenis 1.1.13 (unpkg). Shared header, footer and motion in `js/main.js`.
-- Content: `js/data.js` (`window.RF`: pillars, films, news, people, instagram, marwan, press); gallery in `js/gallery.js`.
-- Pages: index, about, leadership (founder + president; `guillaume.html` redirects here), films, people,
+- Content: `js/data.js` (`window.RF`: pillars, films, news, instagram, marwan, press); gallery in `js/gallery.js`.
+- Pages: index, about, leadership (founder + president; `guillaume.html` redirects here), films,
   news ("Journal"), eveil (L'Éveil d'une Nation / عهد الأمان), gallery, contact, 404.
   `pillar.html` and `article.html` are templates.
 - `prerender.py` reads `data.js` through osascript JXA (macOS only) and generates `/pillars/<slug>/` and `/journal/<slug>/`
@@ -31,6 +31,7 @@ The person working on it writes in Arabic (Jordanian dialect) or English — rep
 - Always present **our founder (Guillaume Rambourg)** and **our president (Sarah Rambourg, since 2023)** together.
 - Always write "Sarah Rambourg", never "Sarah Ben Hsouna".
 - No personal or childhood photos of Guillaume ("it's not a personal blog").
+- Do not name Ridha Moumni or Claire Belhassine anywhere on the site. The Marwan exhibition is presented as Christie's (the foundation was a partner), not tied to any curator.
 - Journal house style: the foundation's voice ("we"), real quotes only (never invented), captioned photos.
 
 ## Sources

@@ -5,7 +5,7 @@
   document.documentElement.classList.add("js");
 
   /* ---------- shared layout ---------- */
-  const nav = [["about.html", "About"], ["index.html#pillars", "Pillars"], ["people.html", "People"], ["films.html", "Films"], ["news.html", "Journal"], ["contact.html", "Contact"]];
+  const nav = [["about.html", "About"], ["index.html#pillars", "Pillars"], ["films.html", "Films"], ["news.html", "Journal"], ["contact.html", "Contact"]];
   const header = document.createElement("header");
   header.className = "header";
   header.innerHTML = `
@@ -51,7 +51,7 @@
     </div>
     <div class="footer__main">
       <div><img class="footer__logo" src="assets/logo/RF_MasterLogo_W.svg" alt="Rambourg Foundation"></div>
-      <div><h4>Foundation</h4><ul><li><a href="about.html">About</a></li><li><a href="leadership.html">Founder &amp; President</a></li><li><a href="index.html#initiatives">Initiatives</a></li><li><a href="people.html">Our people</a></li><li><a href="films.html">Films</a></li><li><a href="eveil.html">L'Éveil d'une Nation</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="news.html">Journal</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h4>Foundation</h4><ul><li><a href="about.html">About</a></li><li><a href="leadership.html">Founder &amp; President</a></li><li><a href="index.html#initiatives">Initiatives</a></li><li><a href="films.html">Films</a></li><li><a href="eveil.html">L'Éveil d'une Nation</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="news.html">Journal</a></li><li><a href="contact.html">Contact</a></li></ul></div>
       <div><h4>Pillars</h4><ul>${RF.pillars.slice(0, 5).map(p => `<li><a href="pillars/${p.slug}/">${p.name}</a></li>`).join("")}</ul></div>
       <div><h4>&nbsp;</h4><ul>${RF.pillars.slice(5).map(p => `<li><a href="pillars/${p.slug}/">${p.name}</a></li>`).join("")}</ul></div>
       <div class="footer__legal"><span>Copyright - 2025 - Rambourg Foundation - All rights reserved. Developed &amp; designed by <a href="https://lonvisuals.com/" target="_blank" rel="noopener">lon visuals</a>.<br>UK registered charity no. 1140347</span><span><a href="https://www.instagram.com/rambourg.foundation/" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.linkedin.com/company/rambourgfoundation" target="_blank" rel="noopener">LinkedIn</a></span></div>

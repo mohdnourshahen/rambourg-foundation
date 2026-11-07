@@ -185,10 +185,6 @@ MAIN = {
                            "award": f["honours"] or None, "url": f"{SITE}/films.html#{f['slug']}"}.items() if v}}
                        for i, f in enumerate(f0)]},
                     crumbs(("Home", SITE + "/"), ("Films", SITE + "/films.html"))]),
-    "people.html": ("Our People: Artists, Scholars & Athletes — Rambourg Foundation",
-                    "The artists, scholars, athletes and communities the Rambourg Foundation has supported since 2011, from Ranim AlHalaky to Alaa Trifi and Jbel Semmama.",
-                    SITE + "/people.html", "assets/img/events/delfina-visit-2026.jpg",
-                    [crumbs(("Home", SITE + "/"), ("Our people", SITE + "/people.html"))]),
     "news.html": ("Journal: News & Stories — Rambourg Foundation",
                   "News and stories from the Rambourg Foundation: residencies, films, exhibitions and scholarships, plus press coverage of our work since 2011.",
                   SITE + "/news.html", "assets/img/events/oscars-2026.jpg",

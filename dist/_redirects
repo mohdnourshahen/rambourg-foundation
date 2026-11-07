@@ -12,3 +12,4 @@
 /pillar.html           p=:p  /pillars/:p/              301
 /article.html          n=:n  /journal/:n/              301
 /guillaume.html        /leadership.html                    301
+/people.html           /about.html                         301
