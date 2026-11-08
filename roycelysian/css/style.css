@@ -670,3 +670,51 @@ body{font:300 15.5px/1.75 var(--sans)}
 .ft-mark::after{content:"Photography · Branding · Editorial Design";font:400 10px/1.6 var(--sans);font-stretch:125%;letter-spacing:.26em;text-transform:uppercase;opacity:.5;text-align:right}
 .ft-bot span:last-child{display:none}
 @media (max-width:720px){.ft-mark{flex-direction:column;align-items:flex-start}.ft-mark::after{text-align:left}.ft-mark img{width:220px}}
+
+
+/* ===== Signature Book — true 3D hardcover ===== */
+.book-stage::before{display:none}
+.book-stage{perspective:2000px;overflow:hidden}
+.book3d{--w:min(330px,62vw);--h:calc(var(--w) * 1.34);--d:38px;
+  --cv:var(--forest);--ink:var(--ivory);--sp:#1A2C25;--edge:#EFE9DD;
+  position:relative;z-index:2;width:var(--w);height:var(--h);transform-style:preserve-3d;
+  transform:rotateX(-4deg) rotateY(32deg) rotateZ(.5deg);transition:transform 1.6s var(--ease)}
+.book-stage:hover .book3d{transform:rotateX(-2deg) rotateY(18deg)}
+.book3d>div{position:absolute}
+
+.b-front{inset:0;transform:translateZ(calc(var(--d) / 2));background:var(--cv);color:var(--ink);border-radius:0 3px 3px 0;
+  display:flex;flex-direction:column;align-items:center;text-align:center;padding:13% 13% 10%;overflow:hidden}
+.b-front::before{content:"";position:absolute;top:0;bottom:0;left:7%;width:2px;background:linear-gradient(90deg,rgba(0,0,0,.22),rgba(255,255,255,.12));opacity:.8}
+.b-front::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,rgba(0,0,0,.28) 0,rgba(0,0,0,0) 9%),linear-gradient(112deg,rgba(255,255,255,0) 38%,rgba(255,255,255,.09) 52%,rgba(255,255,255,0) 66%)}
+.b-kicker{font:400 7.5px/1 var(--sans);font-stretch:125%;letter-spacing:.42em;text-transform:uppercase;opacity:.75;white-space:nowrap}
+.b-plate{width:64%;aspect-ratio:3/4;margin:13% 0 0;overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 6px 14px rgba(0,0,0,.25)}
+.b-plate img{width:100%;height:100%;object-fit:cover}
+.b-title{margin-top:auto;font:400 clamp(18px,1.8vw,24px)/1 var(--serif);font-variation-settings:'opsz' 18;letter-spacing:.42em;text-indent:.42em;text-transform:uppercase}
+.b-title small{display:block;margin-top:10px;font:400 7px/1 var(--sans);font-stretch:125%;letter-spacing:.4em;text-indent:.4em;opacity:.65}
+.b-foot{margin-top:9%;display:flex;align-items:center;gap:8px;font:400 6.5px/1 var(--sans);font-stretch:125%;letter-spacing:.38em;text-transform:uppercase;opacity:.75}
+.b-foot img{width:14px}
+.mono-d{display:none}
+
+.b-spine{top:0;height:100%;width:var(--d);left:calc(50% - var(--d) / 2);transform:rotateY(-90deg) translateZ(calc(var(--w) / 2));
+  background:linear-gradient(90deg,rgba(0,0,0,.25),rgba(255,255,255,.06) 45%,rgba(0,0,0,.2)),var(--sp);color:var(--ink);
+  display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:22px 0 18px}
+.b-spine span{writing-mode:vertical-rl;font:400 10px/1 var(--serif);font-variation-settings:'opsz' 18;letter-spacing:.45em;text-transform:uppercase;opacity:.9}
+.b-spine img{width:13px;opacity:.85}
+.b-pages{top:1.2%;height:97.6%;width:calc(var(--d) - 5px);left:calc(50% - var(--d) / 2 + 2.5px);transform:rotateY(90deg) translateZ(calc(var(--w) / 2 - 4px));
+  background:linear-gradient(90deg,rgba(0,0,0,.1),transparent 30%),repeating-linear-gradient(90deg,var(--edge) 0 1px,#DCD4C4 1px 2px)}
+.b-top{left:0;width:calc(var(--w) - 4px);height:calc(var(--d) - 5px);top:calc(50% - (var(--d) - 5px) / 2);transform:rotateX(90deg) translateZ(calc(var(--h) / 2 - 3px));
+  background:repeating-linear-gradient(0deg,var(--edge) 0 1px,#DCD4C4 1px 2px)}
+.b-back{inset:0;transform:rotateY(180deg) translateZ(calc(var(--d) / 2));background:var(--sp);border-radius:3px 0 0 3px}
+.b-floor{position:absolute;z-index:1;left:50%;bottom:calc(50% - var(--h, 375px) / 2 - 26px);width:min(360px,72vw);height:44px;transform:translateX(-46%);
+  background:radial-gradient(closest-side,rgba(10,18,15,.42),rgba(10,18,15,0));filter:blur(8px);pointer-events:none}
+.book-stage{position:relative}
+.book-stage .book3d + .b-floor{bottom:calc(50% - min(280px,58vw) * .67 - 30px)}
+
+/* on the forest section the book flips to ivory cloth with navy type */
+.book-sec.forest .book3d{--cv:#EAE3D3;--ink:var(--navy);--sp:#D8CFBC;--edge:#F6F2EA}
+.book-sec.forest .mono-l{display:none}
+.book-sec.forest .mono-d{display:block}
+.book-sec.forest .book-stage{background:rgba(243,240,232,.05);outline:0}
+.book-sec.forest .b-floor{background:radial-gradient(closest-side,rgba(0,0,0,.5),rgba(0,0,0,0))}
+.b-floor,.book-stage .book3d + .b-floor{bottom:calc(50% - (min(330px,62vw) * 1.34) / 2 - 24px)}
