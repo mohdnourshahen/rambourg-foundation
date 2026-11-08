@@ -19,8 +19,11 @@
   const heroCap = s => `<span class="label dim">${esc(s.place)}</span><span class="serif">${esc(s.caption)}</span>`;
 
   const rail = D => D.projects.map(card).join('') + '<span class="rail-end"></span>';
-  const expList = D => D.expertise.map(e => `<div class="exp-row" data-img="${IMG(e.img, 1)}">
-      <span class="n">${e.n}</span><h3>${e.name}</h3><p class="items"><span class="lead-s">${esc(e.lead)}</span>${e.items.join(' · ')}</p><span></span></div>`).join('');
+  const expList = D => D.expertise.map(e => `<article class="exp-col rv">
+      <span class="label dim">${e.n}</span>
+      <h3>${esc(e.name)}</h3>
+      <p>${esc(e.lead)}</p>
+      <ul>${e.items.map(i => `<li>${esc(i)}</li>`).join('')}</ul></article>`).join('');
 
   const workList = D => D.projects.map((p, i) => `<a class="wl-item rv" href="${url(p)}">
       <div class="ph rv-img"><img ${IMGS(p.cover, '(max-width:1000px) 100vw, 66vw')} alt="${esc(p.name)}, ${esc(p.place)}" loading="lazy"></div>

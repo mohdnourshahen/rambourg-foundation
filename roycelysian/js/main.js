@@ -199,19 +199,6 @@
     $$('[data-rail]').forEach(b => b.onclick = () => railEl.scrollBy({ left: (+b.dataset.rail) * railEl.clientWidth * .6, behavior: 'smooth' }));
   }
 
-  /* ---------- floating image on expertise rows ---------- */
-  const rows = $$('.exp-row[data-img]');
-  if (rows.length && matchMedia('(hover:hover)').matches) {
-    const fl = document.createElement('div'); fl.className = 'float-img'; fl.setAttribute('aria-hidden', 'true'); fl.innerHTML = '<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAAAAQABAAACAUwAOw==">'; document.body.appendChild(fl);
-    const fi = $('img', fl); let tx = 0, ty = 0, x = 0, y = 0;
-    rows.forEach(r => {
-      r.addEventListener('mouseenter', () => { fi.src = r.dataset.img; fl.classList.add('on'); });
-      r.addEventListener('mouseleave', () => fl.classList.remove('on'));
-    });
-    addEventListener('mousemove', e => { tx = e.clientX + 170; ty = e.clientY; });
-    (function loop() { x += (tx - x) * .14; y += (ty - y) * .14; fl.style.left = x + 'px'; fl.style.top = y + 'px'; requestAnimationFrame(loop); })();
-  }
-
   /* ---------- condensed display + letter split ---------- */
   const logo = $('.open-logo');
   if (logo) {
