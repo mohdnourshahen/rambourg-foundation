@@ -6,21 +6,23 @@
   const esc = R.esc;
 
   /* ---------- shell ---------- */
+  const ON_HOME = page === 'home';
+  const H = id => ON_HOME ? `#${id}` : `index.html#${id}`;
   const NAV = [
-    ['index.html', 'Home', 'zeryab-arcade'], ['work.html', 'Work', 'lazure-hall'], ['expertise.html', 'Expertise', 'zeryab-salon'],
-    ['publications.html', 'Publications', 'zeryab-niche'], ['studio.html', 'Studio', 'zeryab-statue'], ['contact.html', 'Contact', 'nal-terrace']
+    [ON_HOME ? '#top' : 'index.html', 'Home', 'zeryab-arcade'], [H('studio'), 'Studio', 'zeryab-statue'], [H('work'), 'Work', 'lazure-hall'],
+    [H('expertise'), 'Expertise', 'zeryab-salon'], [H('publications'), 'Publications', 'zeryab-niche'], [H('contact'), 'Contact', 'nal-terrace']
   ];
   const C = D.contact;
   document.body.insertAdjacentHTML('afterbegin', `
-  <header class="hd${page === 'home' ? ' off nologo' : ''}" id="hd">
+  <header class="hd${page === 'home' ? ' nologo' : ''}" id="hd">
     <button class="hd-menu" id="openMenu" aria-label="Open menu"><b></b><span class="label">Menu</span></button>
-    <a class="hd-logo" href="index.html" aria-label="Roycelysian home">
+    <a class="hd-logo" href="${NAV[0][0]}" aria-label="Roycelysian home">
       <img class="lt" src="assets/brand/wordmark-ivory.png" alt="Roycelysian" width="614" height="63">
       <img class="ink" src="assets/brand/wordmark-navy.png" alt="" width="614" height="63">
     </a>
     <div class="hd-right">
-      <a class="label link hide-m" href="work.html">Selected Work</a>
-      <a class="hd-cta" href="contact.html"><span class="label">Enquire</span></a>
+      <a class="label link hide-m" href="${H('work')}">Selected Work</a>
+      <a class="hd-cta" href="${H('contact')}"><span class="label">Enquire</span></a>
     </div>
   </header>
   <div class="menu" id="menu" aria-hidden="true">
@@ -99,7 +101,7 @@
     if (window.innerWidth < 1000) $('.intro-text-pj').style.gridColumn = '1/-1';
   }
 
-  if (page === 'contact') {
+  if ($('#form')) {
     const f = $('#form');
     f.addEventListener('submit', e => {
       e.preventDefault();
@@ -179,7 +181,6 @@
     oTitle.style.transform = `translateY(calc(-50% - ${off}px)) scale(${1 - up * .12})`;
     const u = seg(p, .74, .9);
     oUi.style.opacity = u; oUi.style.transform = `translateY(${(1 - u) * 20}px)`; oUi.classList.toggle('on', u > .5);
-    hd.classList.toggle('off', p < .72);
   }
 
   /* ---------- drag rail ---------- */
@@ -234,8 +235,9 @@
     });
     walk(el);
   };
-  $$('.display,.h2,.exp-row h3,.wl-t h2').forEach(el => {
-    if (el.closest('.open')) return;
+  const typeset = root => $$('.display,.h2,.exp-row h3,.wl-t h2', root).forEach(el => {
+    if (el.closest('.open') || el.dataset.ty) return;
+    el.dataset.ty = 1;
     el.setAttribute('aria-label', el.innerHTML.replace(/<br\s*\/?>/gi, ' ').replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim());
     const al = getComputedStyle(el).textAlign;
     const cx = document.createElement('span'); cx.className = 'cx' + (al === 'center' ? ' c' : al === 'right' ? ' r' : ''); cx.setAttribute('aria-hidden', 'true');
@@ -243,11 +245,13 @@
     el.appendChild(cx);
     if (!el.closest('.exp-row') && !el.closest('.wl-item')) { splitText(cx); el.classList.remove('rv'); el.classList.add('sx'); if (el.closest('.phero')) el.style.setProperty('--d', '250ms'); }
   });
+  typeset(document);
   $$('.menu nav a').forEach(a => { const s = a.lastChild; if (s && s.nodeType === 3) { const sp = document.createElement('span'); sp.className = 'cx'; sp.textContent = s.textContent; s.replaceWith(sp); } });
 
   /* ---------- reveals ---------- */
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -10% 0px' });
-  $$('.rv,.rv-img,.sx').forEach(el => io.observe(el));
+  const observe = root => $$('.rv,.rv-img,.sx', root).forEach(el => io.observe(el));
+  observe(document);
 
   /* ---------- parallax on cta ---------- */
   const px = $$('[data-parallax]');
@@ -258,6 +262,86 @@
   addEventListener('resize', () => { arch(); rail(); });
   addEventListener('load', () => { if (freshPage && scrollY < innerHeight) toTop(); });
   onScroll(); parallax();
+
+
+  /* ---------- one-page navigation ---------- */
+  const ease = t => 1 - Math.pow(1 - t, 4);
+  const goTo = (id, immediate) => {
+    const el = id === 'top' ? null : document.getElementById(id);
+    if (id !== 'top' && !el) return false;
+    // shown inside a frame that grows with the page: the frame scrolls, not this window
+    if (document.documentElement.scrollHeight <= innerHeight + 2) { (el || document.body).scrollIntoView({ behavior: immediate ? 'auto' : 'smooth', block: 'start' }); return true; }
+    const y = el ? el.getBoundingClientRect().top + scrollY : 0;
+    if (lenis) lenis.scrollTo(y, immediate ? { immediate: true, force: true } : { duration: Math.min(2.2, .9 + Math.abs(y - scrollY) / 6000), easing: ease, force: true });
+    else window.scrollTo({ top: y, behavior: immediate ? 'auto' : 'smooth' });
+    return true;
+  };
+
+  /* ---------- project panel (case studies open over the page) ---------- */
+  const slugs = new Set(D.projects.map(p => p.slug));
+  let pp = null, ppBody = null, baseTitle = document.title;
+  if (ON_HOME) {
+    document.body.insertAdjacentHTML('beforeend', `<div class="pp" id="pp" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Project">
+      <div class="pp-bar"><span class="label pp-name"></span><button class="pp-close" type="button"><span class="label">Close</span><b></b></button></div>
+      <div class="pp-body" data-lenis-prevent></div></div>`);
+    pp = $('#pp'); ppBody = $('.pp-body', pp);
+    ppBody.addEventListener('scroll', () => pp.classList.toggle('scrolled', ppBody.scrollTop > innerHeight * .75), { passive: true });
+    $('.pp-close', pp).onclick = () => closeProject();
+  }
+  const isOpen = () => pp && pp.classList.contains('open');
+  function openProject(slug, mode) {           // mode: 'push' | 'replace' | 'none'
+    const p = D.projects.find(x => x.slug === slug); if (!p || !pp) return;
+    ppBody.innerHTML = R.project(D, p);
+    typeset(ppBody); observe(ppBody);
+    if (innerWidth < 1000) { const t = $('.intro-text-pj', ppBody); if (t) t.style.gridColumn = '1/-1'; }
+    ppBody.scrollTop = 0; pp.classList.remove('scrolled');
+    $('.pp-name', pp).textContent = `${p.name} — ${p.place}`;
+    pp.classList.add('open'); pp.setAttribute('aria-hidden', 'false');
+    document.documentElement.classList.add('pp-open'); lenis?.stop();
+    document.title = `${p.name} — ${p.place} | Roycelysian`;
+    if (mode === 'push') history.pushState({ pp: slug }, '', '#' + slug);
+    else if (mode === 'replace') history.replaceState({ pp: slug }, '', '#' + slug);
+  }
+  function closeProject(fromHistory) {
+    if (!isOpen()) return;
+    pp.classList.remove('open'); pp.setAttribute('aria-hidden', 'true');
+    document.documentElement.classList.remove('pp-open'); lenis?.start();
+    document.title = baseTitle;
+    if (!fromHistory) {
+      if (history.state && history.state.pp) history.back();
+      else history.replaceState(null, '', location.pathname + location.search);
+    }
+    setTimeout(() => { if (!isOpen()) ppBody.innerHTML = ''; }, 900);
+  }
+  addEventListener('popstate', () => {
+    const h = location.hash.slice(1);
+    if (slugs.has(h)) openProject(h, 'none'); else closeProject(true);
+  });
+  addEventListener('keydown', e => { if (e.key === 'Escape') closeProject(); });
+
+  // capture phase: runs before the page-transition handler below
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a'); if (!a || e.metaKey || e.ctrlKey || e.shiftKey || a.target === '_blank') return;
+    const href = a.getAttribute('href') || '';
+    if (a.closest('.rail.drag')) { e.preventDefault(); e.stopPropagation(); return; }
+    if (!ON_HOME) return;
+    const m = href.match(/^([a-z0-9-]+)\.html$/);
+    if (m && slugs.has(m[1])) { e.preventDefault(); e.stopPropagation(); openProject(m[1], isOpen() ? 'replace' : 'push'); return; }
+    if (href.startsWith('#') && href.length > 1) {
+      const id = href.slice(1);
+      if (id !== 'top' && !document.getElementById(id)) return;
+      e.preventDefault(); e.stopPropagation();
+      setMenu(false); closeProject();
+      setTimeout(() => goTo(id), isOpen() ? 50 : 0);
+    }
+  }, true);
+
+  // arriving with a hash: a project opens in the panel, a section scrolls into place
+  if (ON_HOME && location.hash.length > 1) {
+    const h = decodeURIComponent(location.hash.slice(1));
+    if (slugs.has(h)) openProject(h, 'none');
+    else addEventListener('load', () => goTo(h, true));
+  }
 
   /* ---------- load + page transitions ---------- */
   const start = () => requestAnimationFrame(() => { document.documentElement.classList.add('ready', 'go'); });

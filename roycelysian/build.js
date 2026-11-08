@@ -18,21 +18,6 @@ const PAGES = {
   'index.html': { slug: '', name: 'Home', img: 'zeryab-pool',
     title: 'Roycelysian — Luxury Branding, Photography & Editorial Design Studio',
     desc: 'Creative studio for photography, branding and editorial design for exceptional properties, hotels and premium brands in Jordan, Saudi Arabia and beyond.' },
-  'work.html': { slug: 'work', name: 'Work', img: 'nal-pool',
-    title: 'Selected Work — Hospitality & Architectural Projects | Roycelysian',
-    desc: 'Private estates, resorts and residences in Marrakech, Ibiza, Amman and Saudi Arabia, told through photography and brand identity by Roycelysian.' },
-  'expertise.html': { slug: 'expertise', name: 'Expertise', img: 'zeryab-ceiling',
-    title: 'Expertise — Photography, Branding & Editorial Publishing | Roycelysian',
-    desc: 'Architectural and hospitality photography, brand identity and design, and bespoke editorial publishing, brought together by one creative direction.' },
-  'publications.html': { slug: 'publications', name: 'Publications', img: 'riad-library',
-    title: 'Luxury Coffee Table Books & Architectural Monographs | Roycelysian',
-    desc: 'Bespoke coffee table books, architectural monographs, property books and brand books, from concept and photography to design and fine print production.' },
-  'studio.html': { slug: 'studio', name: 'Studio', img: 'lazure-hall',
-    title: 'Studio — A Creative Studio for Exceptional Places | Roycelysian',
-    desc: 'Roycelysian is a boutique creative studio in Amman for photography, branding and editorial design, with work across Morocco, Spain, Saudi Arabia and Jordan.' },
-  'contact.html': { slug: 'contact', name: 'Contact', img: 'zeryab-statue',
-    title: 'Contact — Start a Project | Roycelysian',
-    desc: 'Start a photography, branding or editorial publishing project with Roycelysian. Based in Amman, working across the Middle East and Europe.' },
   '404.html': { noindex: true, title: 'Page not found — Roycelysian', desc: 'This page could not be found.', img: 'zeryab-arches' },
   'project.html': { noindex: true, title: 'Project — Roycelysian', desc: 'A Roycelysian case study.', img: 'zeryab-pool' }
 };
@@ -112,7 +97,6 @@ for (const [file, p] of Object.entries(PAGES)) {
     html = region(html, 'expList', R.expList(D));
     html = html.replace(/<link rel="preload" as="image"[^>]*>/, `<link rel="preload" as="image" href="${R.IMG(D.hero[0].img)}" imagesrcset="${R.IMG(D.hero[0].img, 1)} 1100w, ${R.IMG(D.hero[0].img)} 2400w" imagesizes="100vw" fetchpriority="high">`);
   }
-  if (file === 'work.html') html = region(html, 'workList', R.workList(D));
   write(file, html);
 }
 
@@ -131,7 +115,7 @@ for (const p of D.projects) {
       creator: { '@id': STUDIO_ID }, contentLocation: { '@type': 'Place', name: p.place },
       genre: p.scope.join(', '), ...(p.client ? { sourceOrganization: { '@type': 'Organization', name: p.client } } : {}),
       ...(p.brand ? { contributor: { '@type': 'Organization', name: p.brand.partner, url: p.brand.link.replace(/\/work\/.*/, '') } } : {}) },
-    crumbs([['Home', `${DOMAIN}/`], ['Work', `${DOMAIN}/work`], [p.name, canonical]])
+    crumbs([['Home', `${DOMAIN}/`], [p.name, canonical]])
   ];
   let html = common(tpl).replace('data-page="project"', `data-page="project" data-slug="${p.slug}"`);
   html = setHead(html, head({ title, desc, img: p.cover, canonical, type: 'article', ld }));

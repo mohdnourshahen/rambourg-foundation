@@ -18,9 +18,9 @@
   const heroDots = D => D.hero.map((_, i) => `<button class="${i ? '' : 'on'}" aria-label="Show slide ${i + 1}"></button>`).join('');
   const heroCap = s => `<span class="label dim">${esc(s.place)}</span><span class="serif">${esc(s.caption)}</span>`;
 
-  const rail = D => D.projects.slice(0, 4).map(card).join('') + '<span class="rail-end"></span>';
-  const expList = D => D.expertise.map(e => `<a class="exp-row" href="expertise.html#${e.slug}" data-img="${IMG(e.img, 1)}">
-      <span class="n">${e.n}</span><h3>${e.name}</h3><p class="items">${e.items.join(' · ')}</p><span class="arr">&rarr;</span></a>`).join('');
+  const rail = D => D.projects.map(card).join('') + '<span class="rail-end"></span>';
+  const expList = D => D.expertise.map(e => `<div class="exp-row" data-img="${IMG(e.img, 1)}">
+      <span class="n">${e.n}</span><h3>${e.name}</h3><p class="items"><span class="lead-s">${esc(e.lead)}</span>${e.items.join(' · ')}</p><span></span></div>`).join('');
 
   const workList = D => D.projects.map((p, i) => `<a class="wl-item rv" href="${url(p)}">
       <div class="ph rv-img"><img ${IMGS(p.cover, '(max-width:1000px) 100vw, 66vw')} alt="${esc(p.name)}, ${esc(p.place)}" loading="lazy"></div>

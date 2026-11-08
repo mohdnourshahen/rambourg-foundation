@@ -13,7 +13,7 @@ Preview: `python3 -m http.server 8796` inside this folder → http://localhost:8
 - Images: `assets/img/` (pulled from the previous roycelysian.com, resized; `-sm` = 1100px versions)
 - Brand: `assets/brand/` (wordmark and R monogram extracted from the old logo, without "Luxury Solutions")
 
-Pages: index, work, project (template: `project.html?p=<slug>`), expertise, publications, studio, contact, 404.
+**One-page site:** `index.html` holds every section (studio, work, expertise, publications, contact). The menu glides between sections; projects open in a panel over the page (`/#<slug>`, Back closes it). Each project also has a standalone page (`<slug>.html`, served at `/<slug>`) for search engines and shared links. Old URLs (`/work`, `/studio`, `/contact`…) redirect to their section.
 
 ## To confirm before launch
 - Email, Instagram, Behance and LinkedIn links (`RY.contact` in `js/data.js`) are placeholders.
