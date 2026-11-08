@@ -819,4 +819,19 @@ body{font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.72}
 .exp-col li{font-size:14px;padding:11px 0;border-top:1px solid rgba(243,240,232,.1);opacity:.85}
 .exp-col li:last-child{border-bottom:1px solid rgba(243,240,232,.1)}
 @media (max-width:900px){.exp-cols{grid-template-columns:1fr;gap:56px}}
-@media (min-width:901px){.exp-col p{min-height:5.1em}}
+
+/* expertise details: hidden until hover / tap */
+.exp-cols{align-items:start}
+.exp-btn{display:block;width:100%;text-align:left;color:inherit;cursor:pointer;position:relative;padding:0 44px 6px 0}
+.exp-btn h3{margin:26px 0 0;transition:transform .6s var(--ease)}
+.exp-plus{position:absolute;right:4px;bottom:16px;width:18px;height:18px;transition:transform .6s var(--ease)}
+.exp-plus::before,.exp-plus::after{content:"";position:absolute;left:0;top:50%;width:18px;height:1px;background:currentColor;opacity:.8}
+.exp-plus::after{transform:rotate(90deg)}
+.exp-col.is-on .exp-plus{transform:rotate(135deg)}
+.exp-col.is-on .exp-btn h3{transform:translateX(6px)}
+.exp-more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .75s var(--ease)}
+.exp-more>div{overflow:hidden;min-height:0;opacity:0;transform:translateY(-10px);transition:opacity .45s ease,transform .75s var(--ease)}
+.exp-more p{padding-top:22px}
+.exp-col.is-on .exp-more{grid-template-rows:1fr}
+.exp-col.is-on .exp-more>div{opacity:1;transform:none;transition-delay:.08s}
+.exp-btn:focus-visible{outline:1px solid var(--ivory);outline-offset:8px}

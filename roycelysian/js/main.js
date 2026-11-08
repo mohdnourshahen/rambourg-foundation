@@ -199,6 +199,13 @@
     $$('[data-rail]').forEach(b => b.onclick = () => railEl.scrollBy({ left: (+b.dataset.rail) * railEl.clientWidth * .6, behavior: 'smooth' }));
   }
 
+  /* ---------- expertise: details open on hover (desktop) or tap (touch) ---------- */
+  $$('.exp-col').forEach(col => {
+    const btn = $('.exp-btn', col), set = on => { col.classList.toggle('is-on', on); btn.setAttribute('aria-expanded', on); };
+    btn.addEventListener('click', () => set(!col.classList.contains('is-on')));
+    if (matchMedia('(hover:hover)').matches) { col.addEventListener('mouseenter', () => set(true)); col.addEventListener('mouseleave', () => set(false)); }
+  });
+
   /* ---------- condensed display + letter split ---------- */
   const logo = $('.open-logo');
   if (logo) {

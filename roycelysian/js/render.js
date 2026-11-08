@@ -20,10 +20,11 @@
 
   const rail = D => D.projects.map(card).join('') + '<span class="rail-end"></span>';
   const expList = D => D.expertise.map(e => `<article class="exp-col rv">
-      <span class="label dim">${e.n}</span>
-      <h3>${esc(e.name)}</h3>
-      <p>${esc(e.lead)}</p>
-      <ul>${e.items.map(i => `<li>${esc(i)}</li>`).join('')}</ul></article>`).join('');
+      <button class="exp-btn" type="button" aria-expanded="false" aria-controls="exp-${e.slug}">
+        <span class="label dim">${e.n}</span><h3>${esc(e.name)}</h3><i class="exp-plus" aria-hidden="true"></i></button>
+      <div class="exp-more" id="exp-${e.slug}"><div>
+        <p>${esc(e.lead)}</p>
+        <ul>${e.items.map(i => `<li>${esc(i)}</li>`).join('')}</ul></div></div></article>`).join('');
 
   const workList = D => D.projects.map((p, i) => `<a class="wl-item rv" href="${url(p)}">
       <div class="ph rv-img"><img ${IMGS(p.cover, '(max-width:1000px) 100vw, 66vw')} alt="${esc(p.name)}, ${esc(p.place)}" loading="lazy"></div>
