@@ -9,7 +9,7 @@ Preview: `python3 -m http.server 8796` inside this folder → http://localhost:8
 - Content and projects: `js/data.js` (contact details, hero slides, projects, expertise)
 - Shared header, menu, footer and motion: `js/main.js`
 - Styles and palette: `css/style.css` (Midnight Navy #17232D, Deep Forest #243A32, Warm Ivory #F3F0E8, Stone #B9B0A2)
-- Type: Cormorant Garamond (display) + Jost (text), Google Fonts
+- Type: Morison Display (headlines, self-hosted WOFF2 in assets/fonts — commercial font, needs a web licence), Hanken Grotesk (text, Google Fonts), Miller Banner (logo wordmark), Monsieur La Doulaise (script accent)
 - Images: `assets/img/` (pulled from the previous roycelysian.com, resized; `-sm` = 1100px versions)
 - Brand: `assets/brand/` (wordmark and R monogram extracted from the old logo, without "Luxury Solutions")
 

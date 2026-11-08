@@ -766,3 +766,46 @@ body{font:300 15.5px/1.75 var(--sans)}
 .pp .pj-next{height:60vh}
 html.pp-open,html.pp-open body{overflow:hidden}
 @media (max-width:720px){.pp-name{display:none}}
+
+
+/* =====================================================================
+   TYPE SYSTEM v3 — Morison Display + Hanken Grotesk
+   ===================================================================== */
+@font-face{font-family:'Morison Display';src:url(../assets/fonts/Morison-Display-Extralight.woff2) format('woff2');font-weight:100 300;font-style:normal;font-display:swap}
+@font-face{font-family:'Morison Display';src:url(../assets/fonts/Morison-Display-Semilight.woff2) format('woff2');font-weight:301 600;font-style:normal;font-display:swap}
+@font-face{font-family:'Morison Display';src:url(../assets/fonts/Morison-Display-Extralight-Italic.woff2) format('woff2');font-weight:100 300;font-style:italic;font-display:swap}
+@font-face{font-family:'Morison Display';src:url(../assets/fonts/Morison-Display-Italic.woff2) format('woff2');font-weight:301 600;font-style:italic;font-display:swap}
+@font-face{font-family:'Morison Display';src:url(../assets/fonts/Morison-Display-Extrabold-Italic.woff2) format('woff2');font-weight:601 900;font-style:italic;font-display:swap}
+:root{--serif:'Morison Display',Didot,'Bodoni 72',Georgia,serif;--sans:'Hanken Grotesk',system-ui,-apple-system,sans-serif;--cx:1}
+body{font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.72}
+.label,.btn,.f label,.chips label,.formats span,.bk-for,.b-kicker,.b-foot,.b-title small,.bk-label,.bk-sub,figcaption,.exp-row .n,.menu nav a small{font-family:var(--sans);font-stretch:normal}
+.label{font-weight:500;font-size:10.5px;letter-spacing:.24em}
+
+/* display: mixed case, ExtraLight, italic for emphasis */
+.display,.h2,.exp-row h3,.wl-t h2,.menu nav a{text-transform:none;font-weight:250;letter-spacing:-.012em;font-variation-settings:normal;font-optical-sizing:auto}
+.display{font-size:clamp(46px,7.4vw,128px);line-height:.98}
+.h2{font-size:clamp(36px,4.6vw,78px);line-height:1.03}
+.exp-row h3{font-size:clamp(30px,3.6vw,60px);line-height:1.02}
+.menu nav a{font-size:clamp(38px,5.2vw,82px);line-height:1.08}
+.display em,.h2 em,.exp-row h3 em,.statement em{font-style:italic;font-weight:250}
+.statement{font-weight:250;font-size:clamp(24px,2.7vw,40px);line-height:1.24;letter-spacing:-.008em}
+.phero .display{font-size:clamp(48px,7vw,120px)}
+.cta .display{font-size:clamp(44px,6.6vw,112px)}
+.card h3,.sectors-mini h3,.caps h4,.bk-item h3,.zb-cred p,.hero-cap .serif,.open-ui .hero-cap .serif{font-family:var(--serif);font-weight:350;letter-spacing:-.005em}
+.exp-row:hover h3 .cx{font-style:italic}
+.ft-top .statement{font-weight:250}
+.open-flank{font-family:var(--serif);font-weight:350}
+.b-title,.bk-title{font-variation-settings:normal;font-weight:350}
+.lead,.intro-side p,.exp-head p{font-weight:300}
+
+@media (max-width:720px){
+  .display{font-size:12.4vw}
+  .phero .display{font-size:11.6vw}
+  .h2{font-size:9.6vw}
+  .exp-row h3{font-size:8.6vw}
+  .cta .display{font-size:11vw}
+  .statement{font-size:24px}
+}
+
+.sx .ch{transform:translateY(.38em);filter:blur(10px);transition:opacity 1s var(--ease),transform 1.3s var(--ease),filter 1.1s var(--ease);transition-delay:calc(var(--i) * 26ms + var(--d,0ms))}
+.sx.in .ch{transform:none;filter:blur(0)}

@@ -227,7 +227,8 @@
           if (!part) return;
           if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
           const w = document.createElement('span'); w.className = 'wd';
-          [...part].forEach(ch => { const s = document.createElement('span'); s.className = 'ch'; s.textContent = ch; s.style.setProperty('--i', Math.min(k++, 34)); w.appendChild(s); });
+          // whole words animate together so the typeface keeps its kerning
+          const s = document.createElement('span'); s.className = 'ch'; s.textContent = part; s.style.setProperty('--i', Math.min(k, 12) * 3); k++; w.appendChild(s);
           frag.appendChild(w);
         });
         c.replaceWith(frag);
