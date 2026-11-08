@@ -35,7 +35,7 @@
         <span class="dim">${C.city}</span>
       </div>
     </div>
-    <div class="menu-r">${NAV.map((n, i) => `<img src="${IMG(n[2], 1)}" alt="" class="${i ? '' : 'on'}" loading="lazy">`).join('')}</div>
+    <div class="menu-r">${NAV.map((n, i) => `<img ${R.IMGS(n[2], '48vw')} alt="" class="${i ? '' : 'on'}" loading="lazy" decoding="async">`).join('')}</div>
   </div>
   <div class="veil"></div>`);
 
@@ -53,7 +53,7 @@
 
   /* menu */
   const menu = $('#menu');
-  const setMenu = o => { menu.classList.toggle('open', o); menu.setAttribute('aria-hidden', !o); o ? lenis?.stop() : lenis?.start(); };
+  const setMenu = o => { menu.classList.toggle('is-open', o); menu.setAttribute('aria-hidden', !o); o ? lenis?.stop() : lenis?.start(); };
   $('#openMenu').onclick = () => setMenu(true);
   $('#closeMenu').onclick = () => setMenu(false);
   addEventListener('keydown', e => e.key === 'Escape' && setMenu(false));
@@ -146,7 +146,7 @@
     const hy = hd.offsetHeight / 2, under = tones.find(t => { const r = t.getBoundingClientRect(); return r.top <= hy && r.bottom > hy; });
     hd.classList.toggle('tone-light', !under);
     if (openEl) hd.classList.toggle('nologo', openEl.getBoundingClientRect().bottom > hd.offsetHeight);
-    hd.classList.toggle('hide', y > lastY && y > innerHeight * 1.2 && !menu.classList.contains('open'));
+    hd.classList.toggle('hide', y > lastY && y > innerHeight * 1.2 && !menu.classList.contains('is-open'));
     lastY = y;
     arch(); rail();
   };
@@ -289,7 +289,7 @@
     ppBody.addEventListener('scroll', () => pp.classList.toggle('scrolled', ppBody.scrollTop > innerHeight * .75), { passive: true });
     $('.pp-close', pp).onclick = () => closeProject();
   }
-  const isOpen = () => pp && pp.classList.contains('open');
+  const isOpen = () => pp && pp.classList.contains('is-open');
   function openProject(slug, mode) {           // mode: 'push' | 'replace' | 'none'
     const p = D.projects.find(x => x.slug === slug); if (!p || !pp) return;
     ppBody.innerHTML = R.project(D, p);
@@ -297,7 +297,7 @@
     if (innerWidth < 1000) { const t = $('.intro-text-pj', ppBody); if (t) t.style.gridColumn = '1/-1'; }
     ppBody.scrollTop = 0; pp.classList.remove('scrolled');
     $('.pp-name', pp).textContent = `${p.name} — ${p.place}`;
-    pp.classList.add('open'); pp.setAttribute('aria-hidden', 'false');
+    pp.classList.add('is-open'); pp.setAttribute('aria-hidden', 'false');
     document.documentElement.classList.add('pp-open'); lenis?.stop();
     document.title = `${p.name} — ${p.place} | Roycelysian`;
     if (mode === 'push') history.pushState({ pp: slug }, '', '#' + slug);
@@ -305,7 +305,7 @@
   }
   function closeProject(fromHistory) {
     if (!isOpen()) return;
-    pp.classList.remove('open'); pp.setAttribute('aria-hidden', 'true');
+    pp.classList.remove('is-open'); pp.setAttribute('aria-hidden', 'true');
     document.documentElement.classList.remove('pp-open'); lenis?.start();
     document.title = baseTitle;
     if (!fromHistory) {

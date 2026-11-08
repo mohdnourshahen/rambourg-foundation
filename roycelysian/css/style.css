@@ -75,7 +75,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
 /* ===== menu overlay ===== */
 .menu{position:fixed;inset:0;z-index:60;background:var(--navy);color:var(--ivory);display:grid;grid-template-columns:1.1fr 1fr;clip-path:inset(0 0 100% 0);transition:clip-path .9s var(--ease);visibility:hidden}
-.menu.open{clip-path:inset(0 0 0 0);visibility:visible}
+.menu.is-open{clip-path:inset(0 0 0 0);visibility:visible}
 .menu-l{padding:120px var(--gut) 40px;display:flex;flex-direction:column;justify-content:space-between;position:relative}
 .menu-close{position:absolute;top:24px;left:var(--gut);display:flex;gap:14px;align-items:center}
 .menu-close b{width:20px;height:20px;position:relative}
@@ -83,7 +83,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .menu-close b::after{transform:rotate(-45deg)}
 .menu nav a{display:flex;align-items:baseline;gap:22px;font:300 clamp(40px,5.6vw,84px)/1.08 var(--serif);opacity:0;transform:translateY(30px);transition:opacity .8s var(--ease),transform .8s var(--ease),color .4s}
 .menu nav a small{font:400 11px var(--sans);letter-spacing:.2em;opacity:.5;width:24px}
-.menu.open nav a{opacity:1;transform:none}
+.menu.is-open nav a{opacity:1;transform:none}
 .menu nav:hover a{color:rgba(243,240,232,.38)}
 .menu nav a:hover{color:var(--ivory);font-style:italic}
 .menu-foot{display:flex;flex-wrap:wrap;gap:12px 40px;border-top:1px solid var(--line-d);padding-top:24px}
@@ -748,7 +748,7 @@ body{font:300 15.5px/1.75 var(--sans)}
 /* ===== project panel ===== */
 .pp{position:fixed;inset:0;z-index:80;background:var(--ivory);transform:translateY(100%);visibility:hidden;
   transition:transform .95s cubic-bezier(.76,0,.24,1),visibility 0s linear .95s;box-shadow:0 -30px 60px rgba(10,16,22,.25)}
-.pp.open{transform:none;visibility:visible;transition:transform .95s cubic-bezier(.76,0,.24,1),visibility 0s}
+.pp.is-open{transform:none;visibility:visible;transition:transform .95s cubic-bezier(.76,0,.24,1),visibility 0s}
 .pp-body{position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
 .pp-bar{position:absolute;top:0;left:0;right:0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:20px;
   padding:20px var(--gut);color:var(--ivory);pointer-events:none;transition:background .5s var(--ease),color .5s var(--ease),padding .5s var(--ease)}
