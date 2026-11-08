@@ -112,6 +112,18 @@
     $$('[data-email]').forEach(a => { a.href = 'mailto:' + C.email; a.textContent = C.email; });
   }
 
+  /* ---------- start every new page at the top ---------- */
+  const navType = (performance.getEntriesByType && performance.getEntriesByType('navigation')[0] || {}).type;
+  const freshPage = navType !== 'back_forward' && !location.hash;
+  if ('scrollRestoration' in history) history.scrollRestoration = freshPage ? 'manual' : 'auto';
+  const toTop = () => {
+    if (!freshPage) return;
+    window.scrollTo(0, 0);
+    // when the site is shown inside a frame that grows with the page, the frame keeps the old scroll: bring it up too
+    if (window.top !== window) { try { document.documentElement.scrollIntoView({ block: 'start' }); } catch (e) {} }
+  };
+  toTop();
+
   /* ---------- smooth scroll ---------- */
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   let lenis = null;
@@ -119,6 +131,7 @@
     lenis = new Lenis({ duration: 1.15, easing: t => 1 - Math.pow(1 - t, 4), smoothWheel: true });
     const raf = t => { lenis.raf(t); requestAnimationFrame(raf); };
     requestAnimationFrame(raf);
+    if (freshPage) lenis.scrollTo(0, { immediate: true, force: true });
   }
 
   /* ---------- header state ---------- */
@@ -243,19 +256,22 @@
   if (lenis) lenis.on('scroll', () => { onScroll(); parallax(); });
   else addEventListener('scroll', () => { onScroll(); parallax(); }, { passive: true });
   addEventListener('resize', () => { arch(); rail(); });
+  addEventListener('load', () => { if (freshPage && scrollY < innerHeight) toTop(); });
   onScroll(); parallax();
 
   /* ---------- load + page transitions ---------- */
   const start = () => requestAnimationFrame(() => { document.documentElement.classList.add('ready', 'go'); });
   (document.fonts && document.fonts.ready ? Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 1800))]) : Promise.resolve()).then(() => setTimeout(start, 120));
 
+  const VT = window.CSS && CSS.supports && CSS.supports('view-transition-name', 'none');
   document.addEventListener('click', e => {
     const a = e.target.closest('a'); if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey || a.target === '_blank') return;
     const href = a.getAttribute('href'); if (!href || href.startsWith('#') || href.startsWith('mailto') || href.startsWith('http')) return;
     if (a.closest('.rail.drag')) { e.preventDefault(); return; }
     const u = new URL(href, location.href);
     if (u.pathname === location.pathname && u.search === location.search && u.hash) return;
-    e.preventDefault(); document.documentElement.classList.add('leaving'); setTimeout(() => location.href = href, 450);
+    if (VT) return;                                   // the browser cross-fades the pages itself
+    e.preventDefault(); document.documentElement.classList.add('leaving'); setTimeout(() => location.href = href, 380);
   });
   addEventListener('pageshow', e => { if (e.persisted) document.documentElement.classList.remove('leaving'); });
 })();
