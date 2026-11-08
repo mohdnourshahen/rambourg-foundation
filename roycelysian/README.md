@@ -1,6 +1,8 @@
 # Roycelysian — website
 
-Static site (HTML/CSS/JS, Lenis smooth scroll). No build step.
+Static site (HTML/CSS/JS, Lenis smooth scroll).
+
+**Build:** run `node build.js` after any edit to `js/data.js` or a page. It prerenders the dynamic sections, writes each page's SEO head and structured data, generates one page per project (`<slug>.html`, served at `/<slug>`), and rewrites `sitemap.xml` and `robots.txt`. Templates live in `js/render.js` (shared by the browser and the build). Images are served as WebP with `-sm` (1100px) variants for phones; the `.jpg` files remain for social share images.
 
 Preview: `python3 -m http.server 8796` inside this folder → http://localhost:8796
 

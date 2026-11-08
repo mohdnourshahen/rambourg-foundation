@@ -1,9 +1,9 @@
 /* Roycelysian — shared shell + motion */
 (() => {
   const D = window.RY, $ = (s, c = document) => c.querySelector(s), $$ = (s, c = document) => [...c.querySelectorAll(s)];
-  const IMG = (k, sm) => `assets/img/${k}${sm ? '-sm' : ''}.jpg`;
+  const R = window.RYR, IMG = R.IMG;
   const page = document.body.dataset.page || '';
-  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const esc = R.esc;
 
   /* ---------- shell ---------- */
   const NAV = [
@@ -58,17 +58,14 @@
   const mImgs = $$('.menu-r img');
   $$('.menu nav a').forEach(a => a.addEventListener('mouseenter', () => mImgs.forEach((m, i) => m.classList.toggle('on', i == a.dataset.i))));
 
-  /* ---------- page renders ---------- */
-  const card = p => `<a class="card" href="project.html?p=${p.slug}">
-      <div class="ph"><img src="${IMG(p.card || p.cover, 1)}" alt="${esc(p.name)}, ${esc(p.place)}" loading="lazy"></div>
-      <div class="card-meta"><h3>${esc(p.name)}</h3><span class="label">${esc(p.place.split(',').pop().trim())}</span></div>
-      <p>${esc(p.type)}</p></a>`;
+  /* ---------- page renders (skipped where build.js already rendered the HTML) ---------- */
+  const fill = (el, html) => { if (el && !el.children.length) el.innerHTML = html; };
 
   if (page === 'home') {
-    // hero slides
     const hs = $('#heroSlides');
-    hs.innerHTML = D.hero.map((s, i) => `<figure class="${i ? '' : 'on'}"><img src="${IMG(s.img)}" alt="${esc(s.caption)}, ${esc(s.place)}" ${i ? 'loading="lazy"' : 'fetchpriority="high"'}></figure>`).join('');
-    $('#heroDots').innerHTML = D.hero.map((_, i) => `<button class="${i ? '' : 'on'}" aria-label="Slide ${i + 1}"></button>`).join('');
+    fill(hs, R.heroSlides(D)); fill($('#heroDots'), R.heroDots(D));
+    const wake = () => $$('img[data-src]', hs).forEach(im => { im.sizes = im.dataset.sizes; im.srcset = im.dataset.srcset; im.src = im.dataset.src; im.removeAttribute('data-src'); });
+    document.readyState === 'complete' ? setTimeout(wake, 300) : addEventListener('load', () => setTimeout(wake, 300));
     let cur = 0, timer;
     const cap = $('#heroCap');
     const go = n => {
@@ -77,69 +74,28 @@
       cur = (n + f.length) % f.length;
       f[cur].classList.add('on'); void d[cur].offsetWidth; d[cur].classList.add('on');
       cap.style.opacity = 0;
-      setTimeout(() => { cap.innerHTML = `<span class="label dim">${esc(D.hero[cur].place)}</span><span class="serif">${esc(D.hero[cur].caption)}</span>`; cap.style.opacity = 1; }, 400);
+      setTimeout(() => { cap.innerHTML = R.heroCap(D.hero[cur]); cap.style.opacity = 1; }, 400);
       clearTimeout(timer); timer = setTimeout(() => go(cur + 1), 6500);
     };
     cap.style.transition = 'opacity .4s';
-    cap.innerHTML = `<span class="label dim">${esc(D.hero[0].place)}</span><span class="serif">${esc(D.hero[0].caption)}</span>`;
+    fill(cap, R.heroCap(D.hero[0]));
     $$('#heroDots button').forEach((b, i) => b.onclick = () => i !== cur && go(i));
     timer = setTimeout(() => go(1), 6500);
-
-    $('#rail').innerHTML = D.projects.slice(0, 4).map(card).join('') + '<span class="rail-end"></span>';
-    $('#expList').innerHTML = D.expertise.map(e => `<a class="exp-row" href="expertise.html#${e.slug}" data-img="${IMG(e.img, 1)}">
-      <span class="n">${e.n}</span><h3>${e.name}</h3><p class="items">${e.items.join(' · ')}</p><span class="arr">&rarr;</span></a>`).join('');
+    fill($('#rail'), R.rail(D));
+    fill($('#expList'), R.expList(D));
   }
 
-  if (page === 'work') {
-    $('#workList').innerHTML = D.projects.map((p, i) => `<a class="wl-item rv" href="project.html?p=${p.slug}">
-      <div class="ph rv-img"><img src="${IMG(p.cover)}" alt="${esc(p.name)}" loading="lazy"></div>
-      <div class="wl-t"><span class="label">0${i + 1} — ${esc(p.place)}</span><h2>${esc(p.name)}</h2><p>${esc(p.title)}.</p>
-      <div class="scope">${p.scope.join(' · ')}</div><span class="btn ghost"><span>View project</span><i></i></span></div></a>`).join('');
-  }
-
-  const fig = (g, cls = '', sm) => `<figure class="${cls} rv"><div class="ph rv-img"${g.r ? ` style="aspect-ratio:${g.r}"` : ''}><img src="${IMG(g.img || g, sm)}" alt="${esc(g.cap || '')}" loading="lazy"></div>${g.cap ? `<figcaption>${esc(g.cap)}</figcaption>` : ''}</figure>`;
-  const brandBlock = p => { const b = p.brand; return `
-    <section class="sec wrap dark zb">
-      <div class="grid zb-head">
-        <div class="zb-label rv"><span class="label dim">Brand Identity</span><span class="label">In collaboration with<br>${esc(b.partner)}</span></div>
-        <div class="zb-intro"><h2 class="h2">${b.title}</h2>${b.text.map((t, i) => `<p class="rv${i ? ' d1' : ''}">${esc(t)}</p>`).join('')}</div>
-      </div>
-      ${b.lead ? fig(b.lead, 'zb-lead') : ''}
-      ${b.pair ? `<div class="zb-pair">${b.pair.map(g => fig(g, '', 1)).join('')}</div>` : ''}
-      ${b.palette ? `<div class="grid zb-pal">
-        <div class="zb-pal-t rv"><span class="label dim">Palette</span><p>${esc(b.paletteText)}</p></div>
-        <div class="zb-sw" style="grid-template-columns:repeat(${b.palette.length},1fr)">${b.palette.map((c, i) => `<div class="rv" style="transition-delay:${i * 70}ms"><i style="background:${c}"></i><span class="label">${c}</span></div>`).join('')}</div>
-      </div>` : ''}
-      ${b.textures ? `<div class="zb-tex">${b.textures.map(t => fig(t, '', 1)).join('')}</div>` : ''}
-      ${b.craft ? fig(b.craft, 'zb-lead') : ''}
-      ${b.objects ? `<div class="zb-pair">${b.objects.map(g => fig(g, '', 1)).join('')}</div>` : ''}
-      ${b.extra ? fig(b.extra, 'zb-extra') : ''}
-      <div class="zb-cred rv">
-        ${b.credits.map(c => `<div><span class="label dim">${esc(c[0])}</span><p>${esc(c[1])}</p></div>`).join('')}
-        <a class="btn ghost" href="${b.link}" target="_blank" rel="noopener"><span>Full identity case</span><i></i></a>
-      </div>
-    </section>
-    ${b.close ? `<section class="zb-close"><img src="${IMG(b.close.img)}" alt="${esc(b.close.cap)}" loading="lazy"></section>` : ''}`; };
+  if (page === 'work') fill($('#workList'), R.workList(D));
 
   if (page === 'project') {
-    const slug = new URLSearchParams(location.search).get('p');
-    const i = Math.max(0, D.projects.findIndex(p => p.slug === slug)), p = D.projects[i], nx = D.projects[(i + 1) % D.projects.length];
-    document.title = `${p.name} — ${p.place} | Roycelysian`;
-    $('#pj').innerHTML = `
-    <section class="phero"><img src="${IMG(p.cover)}" alt="${esc(p.name)}" fetchpriority="high">
-      <div class="phero-in"><div><span class="label">${esc(p.place)} — ${esc(p.type)}</span><h1 class="display">${esc(p.name)}</h1></div>
-      <div class="phero-meta"><p class="serif" style="font-size:22px;line-height:1.3">${esc(p.line)}</p></div></div></section>
-    <section class="sec wrap"><div class="grid">
-      <div style="grid-column:1/4" class="rv"><span class="label">The project</span></div>
-      <div style="grid-column:4/13" class="intro-text-pj">
-        <h2 class="statement rv">${esc(p.title)}</h2>
-        <p class="lead rv d1" style="margin-top:36px">${esc(p.intro)}</p>
-        <div class="pj-meta rv d2"><div><span class="label">Location</span><p>${esc(p.place)}</p></div>${p.client ? `<div><span class="label">Client</span><p>${esc(p.client)}</p></div>` : ''}<div><span class="label">Sector</span><p>${esc(p.type)}</p></div><div><span class="label">Our role</span><p>${p.scope.join('<br>')}</p></div></div>
-      </div></div></section>
-    ${p.gallery.length ? `<section class="wrap" style="padding-bottom:clamp(96px,14vw,200px)"><div class="pj-gal">${p.gallery.map(g => `<figure class="ph rv-img ${g.f}"><img src="${IMG(g.img)}" alt="${esc(p.name)}" loading="lazy"></figure>`).join('')}</div></section>` : ''}
-    ${p.brand ? brandBlock(p) : ''}
-    <a class="pj-next" href="project.html?p=${nx.slug}"><img src="${IMG(nx.cover)}" alt="" loading="lazy">
-      <div><span class="label">Next project</span><span class="display" style="font-size:clamp(40px,6vw,96px)">${esc(nx.name)}</span><span class="label dim">${esc(nx.place)}</span></div></a>`;
+    const pj = $('#pj');
+    if (!pj.children.length) {
+      // legacy project.html?p=slug: render, then hand the visitor the real URL
+      const slug = new URLSearchParams(location.search).get('p');
+      const p = D.projects.find(x => x.slug === slug) || D.projects[0];
+      document.title = `${p.name} — ${p.place} | Roycelysian`;
+      pj.innerHTML = R.project(D, p);
+    }
     if (window.innerWidth < 1000) $('.intro-text-pj').style.gridColumn = '1/-1';
   }
 
@@ -232,7 +188,7 @@
   /* ---------- floating image on expertise rows ---------- */
   const rows = $$('.exp-row[data-img]');
   if (rows.length && matchMedia('(hover:hover)').matches) {
-    const fl = document.createElement('div'); fl.className = 'float-img'; fl.innerHTML = '<img alt="">'; document.body.appendChild(fl);
+    const fl = document.createElement('div'); fl.className = 'float-img'; fl.setAttribute('aria-hidden', 'true'); fl.innerHTML = '<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAAAAQABAAACAUwAOw==">'; document.body.appendChild(fl);
     const fi = $('img', fl); let tx = 0, ty = 0, x = 0, y = 0;
     rows.forEach(r => {
       r.addEventListener('mouseenter', () => { fi.src = r.dataset.img; fl.classList.add('on'); });
@@ -267,7 +223,7 @@
   };
   $$('.display,.h2,.exp-row h3,.wl-t h2').forEach(el => {
     if (el.closest('.open')) return;
-    el.setAttribute('aria-label', el.textContent.replace(/\s+/g, ' ').trim());
+    el.setAttribute('aria-label', el.innerHTML.replace(/<br\s*\/?>/gi, ' ').replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim());
     const al = getComputedStyle(el).textAlign;
     const cx = document.createElement('span'); cx.className = 'cx' + (al === 'center' ? ' c' : al === 'right' ? ' r' : ''); cx.setAttribute('aria-hidden', 'true');
     while (el.firstChild) cx.appendChild(el.firstChild);

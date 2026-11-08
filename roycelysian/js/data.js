@@ -31,12 +31,12 @@ window.RY = {
       cover: 'zeryab-pool',
       card: 'zeryab-arcade',
       gallery: [
-        { img: 'zeryab-gate', f: 'wide' },
-        { img: 'zeryab-arches', f: 'tall' },
-        { img: 'zeryab-niche', f: 'tall' },
-        { img: 'zeryab-salon', f: 'wide' },
-        { img: 'zeryab-statue', f: 'tall' },
-        { img: 'zeryab-ceiling', f: 'tall', fit: 'cover' }
+        { img: 'zeryab-gate', f: 'wide', alt: 'Terracotta entrance gate with a Moorish arch at Zeryab Estates, Marrakech' },
+        { img: 'zeryab-arches', f: 'tall', alt: 'A long corridor of Moorish arches at Zeryab Estates' },
+        { img: 'zeryab-niche', f: 'tall', alt: 'Portrait painting framed in a carved niche, Zeryab Estates' },
+        { img: 'zeryab-salon', f: 'wide', alt: 'Salon with fireplace, sculpture and patterned rug at Zeryab Estates' },
+        { img: 'zeryab-statue', f: 'tall', alt: 'Marble statue at the end of an arched gallery in evening light, Zeryab Estates' },
+        { img: 'zeryab-ceiling', f: 'tall', alt: 'Hand-crafted cedar ceiling detail, Zeryab Estates' }
       ],
       brand: {
         partner: 'Lōn Visuals',
@@ -78,7 +78,7 @@ window.RY = {
       scope: ['Hospitality Photography', 'Interiors', 'Retouching & Colour Grading'],
       cover: 'riad-garden',
       gallery: [
-        { img: 'riad-library', f: 'wide' }
+        { img: 'riad-library', f: 'wide', alt: 'Library and salon framed by a carved stucco arch, Marrakech' }
       ]
     },
     {
@@ -92,7 +92,7 @@ window.RY = {
       scope: ['Architectural Photography', 'Lifestyle', 'Colour Grading'],
       cover: 'nal-terrace',
       gallery: [
-        { img: 'nal-pool', f: 'wide' }
+        { img: 'nal-pool', f: 'wide', alt: 'Infinity pool and palm tree at dusk, Nal Vila, Ibiza' }
       ]
     },
     {
@@ -107,9 +107,9 @@ window.RY = {
       scope: ['Interior & Lifestyle Photography', 'Retouching & Colour Grading'],
       cover: 'skyline-living',
       gallery: [
-        { img: 'skyline-dining', f: 'wide' },
-        { img: 'skyline-sofa', f: 'half' },
-        { img: 'skyline-table', f: 'half' }
+        { img: 'skyline-dining', f: 'wide', alt: 'Dining room with floor-to-ceiling windows over Amman, The Skyline Residences' },
+        { img: 'skyline-sofa', f: 'half', alt: 'Living room with curved sofa and city views, The Skyline Residences, Amman' },
+        { img: 'skyline-table', f: 'half', alt: 'Dining table set before a panoramic view of Amman' }
       ]
     },
     {
@@ -123,7 +123,7 @@ window.RY = {
       scope: ['Hospitality & Interior Photography', 'Retouching & Colour Grading', 'Brand Identity & Website, with Lōn Visuals'],
       cover: 'lazure-hall',
       gallery: [
-        { img: 'lazure-salon', f: 'wide' }
+        { img: 'lazure-salon', f: 'wide', alt: "Lounge with arched windows at Royal L'Azure Resort" }
       ],
       brand: {
         partner: 'Lōn Visuals',

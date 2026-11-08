@@ -1,5 +1,5 @@
 /* ROYCELYSIAN — Contemporary Editorial Luxury */
-@font-face{font-family:'Miller Banner';src:url(../assets/fonts/MillerBannerLight.ttf) format('truetype');font-weight:300 400;font-display:swap}
+@font-face{font-family:'Miller Banner';src:url(../assets/fonts/MillerBannerLight.woff2) format('woff2'),url(../assets/fonts/MillerBannerLight.ttf) format('truetype');font-weight:300 400;font-display:swap}
 :root{
   --navy:#17232D; --navy-2:#1E2C38; --forest:#243A32; --ivory:#F3F0E8; --ivory-2:#EAE5DA;
   --stone:#B9B0A2; --ink:#171717; --muted:#6E6A63;
@@ -718,3 +718,5 @@ body{font:300 15.5px/1.75 var(--sans)}
 .book-sec.forest .book-stage{background:rgba(243,240,232,.05);outline:0}
 .book-sec.forest .b-floor{background:radial-gradient(closest-side,rgba(0,0,0,.5),rgba(0,0,0,0))}
 .b-floor,.book-stage .book3d + .b-floor{bottom:calc(50% - (min(330px,62vw) * 1.34) / 2 - 24px)}
+
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
