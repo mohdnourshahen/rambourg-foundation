@@ -902,3 +902,16 @@ body{font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.72}
 @media (max-width:720px){.s-place{font-size:11px;letter-spacing:.18em}}
 /* A2.2: project names in the slideshow use the heavier upright weight */
 .s-name{font-weight:350;letter-spacing:-.018em}
+
+/* ===== Brought to light: photographs through depth ===== */
+.fly{position:relative;height:520vh;background:#0E161D;color:var(--ivory)}
+.fly-stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;perspective:900px;perspective-origin:50% 50%}
+.fly-stage{position:absolute;inset:0;transform-style:preserve-3d}
+.fly-card{position:absolute;left:50%;top:50%;margin:0;overflow:hidden;opacity:0;visibility:hidden;will-change:transform,opacity;box-shadow:0 30px 60px rgba(0,0,0,.45);background:#1a242d}
+.fly-card img{width:100%;height:100%;object-fit:cover;display:block}
+.fly-title{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:5;pointer-events:none;
+  font:250 clamp(44px,6.6vw,112px)/1.02 var(--serif);letter-spacing:-.015em;text-shadow:0 2px 30px rgba(0,0,0,.5)}
+.fly-title em{font-style:italic}
+.fly-hint{position:absolute;left:50%;bottom:34px;transform:translateX(-50%);z-index:5;opacity:.55}
+@media (max-width:720px){.fly{height:440vh}.fly-title{font-size:12vw}}
+@media (prefers-reduced-motion:reduce){.fly{height:auto}.fly-stick{position:relative}.fly-card{display:none}}

@@ -187,7 +187,7 @@
   /* ---------- header state ---------- */
   const hd = $('#hd');
   let lastY = 0;
-  const tones = $$('.open,.dark,.forest,.cta,.phero,.pj-next,.ft,.zb-close');
+  const tones = $$('.open,.dark,.forest,.cta,.phero,.pj-next,.ft,.zb-close,.fly');
   const onScroll = () => {
     const y = scrollY, th = page === 'home' || document.body.classList.contains('has-hero') ? innerHeight * .8 : 40;
     hd.classList.toggle('solid', page === 'contact' || (y > th && !inArch()));
@@ -253,6 +253,45 @@
     btn.addEventListener('click', () => set(!col.classList.contains('is-on')));
     if (matchMedia('(hover:hover)').matches) { col.addEventListener('mouseenter', () => set(true)); col.addEventListener('mouseleave', () => set(false)); }
   });
+
+
+  /* ---------- brought to light: random photographs travel through depth ---------- */
+  const fly = $('#fly'), stage = $('#flyStage');
+  if (fly && stage) {
+    const pool = [...new Set([].concat(...D.slides.map(s => s.imgs || [])).concat(...D.projects.map(p => [p.cover, ...p.gallery.map(g => g.img)])))]
+      .filter(k => !/^(zb|lz)-/.test(k));
+    for (let i = pool.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [pool[i], pool[j]] = [pool[j], pool[i]]; }
+    const mob = innerWidth <= 720, N = Math.min(pool.length, mob ? 12 : 20), GAP = mob ? 520 : 620, FAR = 3600;
+    const cards = pool.slice(0, N).map((k, i) => {
+      // alternate sides so the centre (title) stays clear; random height, size and tilt
+      const side = i % 2 ? 1 : -1, x = side * (mob ? 14 + Math.random() * 20 : 16 + Math.random() * 26), y = (Math.random() * 2 - 1) * (mob ? 26 : 30);
+      const w = (mob ? 34 : 15) + Math.random() * (mob ? 18 : 11), portrait = Math.random() < .35;
+      const el = document.createElement('figure'); el.className = 'fly-card';
+      el.style.width = w + 'vw'; el.style.aspectRatio = portrait ? '4/5' : '3/2';
+      el.innerHTML = `<img src="${IMG(k, 1)}" alt="" loading="lazy" decoding="async">`;
+      stage.appendChild(el);
+      return { el, x, y, z0: -i * GAP, r: (Math.random() * 2 - 1) * 3 };
+    });
+    const travel = N * GAP - 100;
+    const flyTick = () => {
+      const r = fly.getBoundingClientRect(), total = r.height - innerHeight;
+      if (r.bottom < 0 || r.top > innerHeight) return;
+      const p = Math.min(1, Math.max(0, -r.top / total)), dz = p * travel;
+      for (const c of cards) {
+        const z = c.z0 + dz;                                   // 0 = picture plane; >0 = passing the viewer
+        const o = z < -FAR ? 0 : z < -FAR + 900 ? (z + FAR) / 900 : z > 520 ? Math.max(0, 1 - (z - 520) / 260) : 1;
+        const blur = z < -1400 ? Math.min(6, (-1400 - z) / 380) : 0;
+        c.el.style.opacity = o.toFixed(3);
+        c.el.style.visibility = o > 0.01 ? 'visible' : 'hidden';
+        c.el.style.filter = blur ? `blur(${blur.toFixed(1)}px)` : 'none';
+        const spread = 1 + Math.max(0, -z) / 2200;            // keep distant frames off the title
+        c.el.style.transform = `translate(-50%,-50%) translate3d(${c.x * spread}vw, ${c.y * spread}vh, ${z}px) rotate(${c.r}deg)`;
+      }
+      fly.style.setProperty('--fp', p.toFixed(3));
+    };
+    if (lenis) lenis.on('scroll', flyTick); else addEventListener('scroll', flyTick, { passive: true });
+    addEventListener('resize', flyTick); flyTick();
+  }
 
   /* ---------- condensed display + letter split ---------- */
   const logo = $('.open-logo');
