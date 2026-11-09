@@ -22,6 +22,7 @@ window.RY = {
   slides: [
     { slug: 'zeryab-estates', imgs: ['zeryab-pool', 'zeryab-gate', 'zeryab-salon'] },
     { slug: 'royal-lazure', imgs: ['lazure-hall', 'lazure-salon'] },
+    { slug: 'riad-elhob', imgs: ['riad-lounge', 'riad-dining', 'riad-bedroom'] },
     { slug: 'skyline-residences', imgs: ['skyline-living', 'skyline-dining', 'skyline-sofa'] },
     { slug: 'nal-vila', imgs: ['nal-terrace', 'nal-pool'] }
   ],
@@ -82,11 +83,14 @@ window.RY = {
       type: 'Guest House',
       title: 'Elevating Property, Redefining Elegance',
       line: 'Capturing the essence of exclusivity.',
-      intro: 'A guest house built around the stillness of its garden. Our work here was about atmosphere as much as architecture: the light across the pool at the end of the day, the weight of the salons, the sense of arriving somewhere private.',
+      intro: 'A guest house in Marrakech where every room is composed like a still life: a library lounge beneath carved plaster ceilings, suites warmed by low lamplight, and a shaded terrace where the light moves across zellige and marble through the day. Our work here was about atmosphere as much as architecture.',
       scope: ['Hospitality Photography', 'Interiors', 'Retouching & Colour Grading'],
-      cover: 'riad-garden',
+      cover: 'riad-lounge',
       gallery: [
-        { img: 'riad-library', f: 'wide', alt: 'Library and salon framed by a carved stucco arch, Marrakech' }
+        { img: 'riad-dining', f: 'wide', alt: 'Terrace dining room with a brass lantern and a portrait, Riad Elhob, Marrakech' },
+        { img: 'riad-bedroom', f: 'half', alt: 'Suite with a carved ceiling, brass lantern and lamplit bed, Riad Elhob' },
+        { img: 'riad-suite', f: 'half', alt: 'Suite framed by columns in warm evening light, Riad Elhob' },
+        { img: 'riad-terrace', f: 'wide', alt: 'Shaded terrace with a woven ceiling and marble floor in sunlight, Riad Elhob' }
       ]
     },
     {
