@@ -20,7 +20,7 @@ window.RY = {
 
   // home slideshow, in order
   slides: [
-    { slug: 'zeryab-estates', imgs: ['zeryab-pool', 'zeryab-gate', 'zeryab-salon'] },
+    { slug: 'zeryab-estates', imgs: ['zeryab-pool', 'zeryab-gate', 'zeryab-suite'] },
     { slug: 'royal-lazure', imgs: ['lazure-hall', 'lazure-salon'] },
     { slug: 'riad-elhob', imgs: ['riad-lounge', 'riad-dining', 'riad-bedroom'] },
     { slug: 'skyline-residences', imgs: ['skyline-living', 'skyline-dining', 'skyline-sofa'] },
@@ -43,9 +43,12 @@ window.RY = {
         { img: 'zeryab-gate', f: 'wide', alt: 'Terracotta entrance gate with a Moorish arch at Zeryab Estates, Marrakech' },
         { img: 'zeryab-arches', f: 'tall', alt: 'A long corridor of Moorish arches at Zeryab Estates' },
         { img: 'zeryab-niche', f: 'tall', alt: 'Portrait painting framed in a carved niche, Zeryab Estates' },
-        { img: 'zeryab-salon', f: 'wide', alt: 'Salon with fireplace, sculpture and patterned rug at Zeryab Estates' },
+        { img: 'zeryab-suite', f: 'wide', alt: 'Suite with carved cedar beams, art deco furniture and late sunlight, Zeryab Estates' },
+        { img: 'zeryab-bath', f: 'tall', alt: 'Bathroom of horseshoe arches, marble vanities and brass fittings, Zeryab Estates' },
         { img: 'zeryab-statue', f: 'tall', alt: 'Marble statue at the end of an arched gallery in evening light, Zeryab Estates' },
-        { img: 'zeryab-ceiling', f: 'tall', alt: 'Hand-crafted cedar ceiling detail, Zeryab Estates' }
+        { img: 'zeryab-lounge', f: 'wide', alt: 'Lounge beneath a carved black alcove with leather sofas, Zeryab Estates' },
+        { img: 'zeryab-bathlounge', f: 'wide', alt: 'Bathroom lounge with a carved plaster window over the garden, Zeryab Estates' },
+        { img: 'zeryab-salon', f: 'wide', alt: 'Study with fireplace, sculpture and patterned rug at Zeryab Estates' }
       ],
       brand: {
         partner: 'Lōn Visuals',
