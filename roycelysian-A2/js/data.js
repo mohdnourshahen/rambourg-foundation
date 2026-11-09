@@ -24,7 +24,7 @@ window.RY = {
     { slug: 'royal-lazure', imgs: ['lazure-hall', 'lazure-salon'] },
     { slug: 'riad-elhob', imgs: ['riad-lounge', 'riad-dining', 'riad-bedroom'] },
     { slug: 'skyline-residences', imgs: ['skyline-living', 'skyline-dining', 'skyline-lounge'] },
-    { slug: 'nal-vila', imgs: ['nal-terrace', 'nal-pool'] }
+    { slug: 'nal-vila', imgs: ['nal-terrace', 'nal-infinity', 'nal-daybed'] }
   ],
 
   projects: [
@@ -107,7 +107,12 @@ window.RY = {
       scope: ['Architectural Photography', 'Lifestyle', 'Colour Grading'],
       cover: 'nal-terrace',
       gallery: [
-        { img: 'nal-pool', f: 'wide', alt: 'Infinity pool and palm tree at dusk, Nal Vila, Ibiza' }
+        { img: 'nal-infinity', f: 'wide', alt: 'Infinity pool with fringed parasols above the hills and sea, Nal Vila, Ibiza' },
+        { img: 'nal-daybed', f: 'half', alt: 'Woven daybed and palm on the terrace, sea beyond, Nal Vila' },
+        { img: 'nal-lounge', f: 'half', alt: 'Outdoor lounge facing the hills under an evening sky, Nal Vila' },
+        { img: 'nal-living', f: 'wide', alt: 'Living room with linen curtains opening onto the terrace, Nal Vila, Ibiza' },
+        { img: 'nal-garden', f: 'wide', alt: 'Garden path, palm and pool along the white villa, Nal Vila' },
+                { img: 'nal-pool', f: 'wide', alt: 'Infinity pool and palm tree at dusk, Nal Vila, Ibiza' }
       ]
     },
     {
