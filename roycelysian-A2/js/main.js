@@ -9,8 +9,8 @@
   const ON_HOME = page === 'home';
   const H = id => ON_HOME ? `#${id}` : `index.html#${id}`;
   const NAV = [
-    [ON_HOME ? '#top' : 'index.html', 'Home', 'zeryab-arcade'], [H('studio'), 'Studio', 'zeryab-statue'], [H('work'), 'Work', 'lazure-hall'],
-    [H('expertise'), 'Expertise', 'zeryab-salon'], [H('publications'), 'Publications', 'zeryab-niche'], [H('contact'), 'Contact', 'nal-terrace']
+    [ON_HOME ? '#top' : 'index.html', 'Home', 'zeryab-pool'], ['work.html', 'Work', 'lazure-hall'], ['studio.html', 'Studio', 'zeryab-statue'],
+    ['publications.html', 'Publications', 'zeryab-niche'], [H('contact'), 'Contact', 'skyline-living']
   ];
   const C = D.contact;
   document.body.insertAdjacentHTML('afterbegin', `
@@ -21,7 +21,7 @@
       <img class="ink" src="assets/brand/wordmark-navy.png" alt="" width="614" height="63">
     </a>
     <div class="hd-right">
-      <a class="label link hide-m" href="${H('work')}">Selected Work</a>
+      <a class="label link hide-m" href="work.html">Selected Work</a>
       <a class="hd-cta" href="${H('contact')}"><span class="label">Enquire</span></a>
     </div>
   </header>
@@ -64,26 +64,67 @@
   const fill = (el, html) => { if (el && !el.children.length) el.innerHTML = html; };
 
   if (page === 'home') {
-    const hs = $('#heroSlides');
-    fill(hs, R.heroSlides(D)); fill($('#heroDots'), R.heroDots(D));
-    const wake = () => $$('img[data-src]', hs).forEach(im => { im.sizes = im.dataset.sizes; im.srcset = im.dataset.srcset; im.src = im.dataset.src; im.removeAttribute('data-src'); });
-    document.readyState === 'complete' ? setTimeout(wake, 300) : addEventListener('load', () => setTimeout(wake, 300));
-    let cur = 0, timer;
-    const cap = $('#heroCap');
-    const go = n => {
-      const f = $$('figure', hs), d = $$('#heroDots button');
-      f[cur].classList.remove('on'); d[cur].classList.remove('on');
-      cur = (n + f.length) % f.length;
-      f[cur].classList.add('on'); void d[cur].offsetWidth; d[cur].classList.add('on');
-      cap.style.opacity = 0;
-      setTimeout(() => { cap.innerHTML = R.heroCap(D.hero[cur]); cap.style.opacity = 1; }, 400);
-      clearTimeout(timer); timer = setTimeout(() => go(cur + 1), 6500);
+    const hero = $('#open'), win = $('#openWin'), rings = $$('.open-ring'), sl = $('#slides');
+    fill(sl, R.slides(D));
+    const S = $$('.slide', sl), N = S.length;
+    $('#sTot').textContent = String(N).padStart(2, '0');
+    let seen = false; try { seen = !!sessionStorage.getItem('ry-intro'); sessionStorage.setItem('ry-intro', '1'); } catch (e) {}
+    const fast = seen || matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // the window: hidden below → small arch → full screen
+    let stage = 0;
+    const geo = () => {
+      const W = innerWidth, H = innerHeight, mob = W <= 720;
+      const w0 = mob ? W * .74 : Math.min(W * .3, H * .56), h0 = mob ? H * .6 : H * .8;
+      const full = stage >= 2, w = full ? W : w0, h = full ? H : h0, rad = full ? 0 : w0 / 2, ty = stage === 0 ? h0 + 60 : 0;
+      [win, ...rings].forEach((el, i) => {
+        const o = i * (mob ? 12 : 18);
+        el.style.width = (w + o * 2) + 'px'; el.style.height = (h + o) + 'px';
+        el.style.borderRadius = `${rad + o}px ${rad + o}px 0 0`; el.style.transform = `translate(-50%, ${ty}px)`;
+        if (i) el.style.opacity = full ? 0 : .9;
+      });
     };
-    cap.style.transition = 'opacity .4s';
-    fill(cap, R.heroCap(D.hero[0]));
-    $$('#heroDots button').forEach((b, i) => b.onclick = () => i !== cur && go(i));
-    timer = setTimeout(() => go(1), 6500);
-    fill($('#rail'), R.rail(D));
+    const to = n => { stage = n; hero.classList.add('st' + n); geo(); };
+    hero.classList.add('notrans'); geo(); void hero.offsetWidth; requestAnimationFrame(() => hero.classList.remove('notrans'));
+    addEventListener('resize', () => { hero.classList.add('notrans'); geo(); requestAnimationFrame(() => hero.classList.remove('notrans')); });
+
+    // slideshow
+    let si = 0, timer = null, paused = false, started = false;
+    const bar = $('#sBar'), cur = $('#sCur'), DUR = 6000;
+    const wake = im => { if (im && im.dataset.src) { im.sizes = im.dataset.sizes; im.srcset = im.dataset.srcset; im.src = im.dataset.src; im.removeAttribute('data-src'); } };
+    const runBar = () => {
+      bar.style.transition = 'none'; bar.style.transform = 'scaleX(0)'; void bar.offsetWidth;
+      if (!paused) { bar.style.transition = `transform ${DUR}ms linear`; bar.style.transform = 'scaleX(1)'; }
+    };
+    const tick = () => { clearTimeout(timer); runBar(); if (!paused) timer = setTimeout(() => show(si + 1), DUR); };
+    const show = n => {
+      S[si].classList.remove('is-on'); si = (n + N) % N;
+      wake($('img', S[si])); S[si].classList.add('is-on'); wake($('img', S[(si + 1) % N]));
+      cur.textContent = String(si + 1).padStart(2, '0');
+      if (started) tick();
+    };
+    const play = () => { started = true; wake($('img', S[1 % N])); tick(); };
+    $('#sNext').onclick = () => started && show(si + 1);
+    $('#sPrev').onclick = () => started && show(si - 1);
+    if (matchMedia('(hover:hover)').matches) {
+      // pause only while reading a project's details or using the controls (the hero fills the screen)
+      const hold = () => { paused = true; clearTimeout(timer); const t = getComputedStyle(bar).transform; bar.style.transition = 'none'; bar.style.transform = t; };
+      const release = () => { paused = false; if (started) tick(); };
+      [$('#sNav'), ...$$('.s-cap', sl)].forEach(el => { el.addEventListener('mouseenter', hold); el.addEventListener('mouseleave', release); });
+    }
+    let tx = null;
+    hero.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+    hero.addEventListener('touchend', e => { if (tx === null || !started) return; const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 50) show(si + (dx < 0 ? 1 : -1)); tx = null; });
+    addEventListener('keydown', e => { if (!started || scrollY > innerHeight * .5) return; if (e.key === 'ArrowRight') show(si + 1); if (e.key === 'ArrowLeft') show(si - 1); });
+    document.addEventListener('visibilitychange', () => { if (document.hidden) clearTimeout(timer); else if (started && !paused) tick(); });
+
+    // timeline starts once the entrance animation is running
+    const T = fast ? [150, 750, 1900] : [1800, 3900, 5200];
+    addEventListener('ry-go', () => {
+      setTimeout(() => to(1), T[0]);
+      setTimeout(() => { to(2); $('#hd').classList.remove('nologo'); }, T[1]);
+      setTimeout(() => { hero.classList.add('ui'); play(); }, T[2]);
+    }, { once: true });
     fill($('#expList'), R.expList(D));
   }
 
@@ -145,7 +186,7 @@
     hd.classList.toggle('solid', page === 'contact' || (y > th && !inArch()));
     const hy = hd.offsetHeight / 2, under = tones.find(t => { const r = t.getBoundingClientRect(); return r.top <= hy && r.bottom > hy; });
     hd.classList.toggle('tone-light', !under);
-    if (openEl) hd.classList.toggle('nologo', openEl.getBoundingClientRect().bottom > hd.offsetHeight);
+    if (openEl && !openEl.classList.contains('auto')) hd.classList.toggle('nologo', openEl.getBoundingClientRect().bottom > hd.offsetHeight);
     hd.classList.toggle('hide', y > lastY && y > innerHeight * 1.2 && !menu.classList.contains('is-open'));
     lastY = y;
     arch(); rail();
@@ -159,7 +200,7 @@
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v)), seg = (p, a, b) => clamp((p - a) / (b - a)),
         eio = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2, eo = t => 1 - Math.pow(1 - t, 3);
   function arch() {
-    if (!openEl) return;
+    if (!openEl || openEl.classList.contains('auto')) return;
     const r = openEl.getBoundingClientRect(), total = r.height - innerHeight;
     const p = openP = clamp(-r.top / total);
     const W = innerWidth, H = innerHeight, mob = W <= 720;
@@ -272,74 +313,26 @@
     return true;
   };
 
-  /* ---------- project panel (case studies open over the page) ---------- */
-  const slugs = new Set(D.projects.map(p => p.slug));
-  let pp = null, ppBody = null, baseTitle = document.title;
-  if (ON_HOME) {
-    document.body.insertAdjacentHTML('beforeend', `<div class="pp" id="pp" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Project">
-      <div class="pp-bar"><span class="label pp-name"></span><button class="pp-close" type="button"><span class="label">Close</span><b></b></button></div>
-      <div class="pp-body" data-lenis-prevent></div></div>`);
-    pp = $('#pp'); ppBody = $('.pp-body', pp);
-    ppBody.addEventListener('scroll', () => pp.classList.toggle('scrolled', ppBody.scrollTop > innerHeight * .75), { passive: true });
-    $('.pp-close', pp).onclick = () => closeProject();
-  }
-  const isOpen = () => pp && pp.classList.contains('is-open');
-  function openProject(slug, mode) {           // mode: 'push' | 'replace' | 'none'
-    const p = D.projects.find(x => x.slug === slug); if (!p || !pp) return;
-    ppBody.innerHTML = R.project(D, p);
-    typeset(ppBody); observe(ppBody);
-    if (innerWidth < 1000) { const t = $('.intro-text-pj', ppBody); if (t) t.style.gridColumn = '1/-1'; }
-    ppBody.scrollTop = 0; pp.classList.remove('scrolled');
-    $('.pp-name', pp).textContent = `${p.name} — ${p.place}`;
-    pp.classList.add('is-open'); pp.setAttribute('aria-hidden', 'false');
-    document.documentElement.classList.add('pp-open'); lenis?.stop();
-    document.title = `${p.name} — ${p.place} | Roycelysian`;
-    if (mode === 'push') history.pushState({ pp: slug }, '', '#' + slug);
-    else if (mode === 'replace') history.replaceState({ pp: slug }, '', '#' + slug);
-  }
-  function closeProject(fromHistory) {
-    if (!isOpen()) return;
-    pp.classList.remove('is-open'); pp.setAttribute('aria-hidden', 'true');
-    document.documentElement.classList.remove('pp-open'); lenis?.start();
-    document.title = baseTitle;
-    if (!fromHistory) {
-      if (history.state && history.state.pp) history.back();
-      else history.replaceState(null, '', location.pathname + location.search);
-    }
-    setTimeout(() => { if (!isOpen()) ppBody.innerHTML = ''; }, 900);
-  }
-  addEventListener('popstate', () => {
-    const h = location.hash.slice(1);
-    if (slugs.has(h)) openProject(h, 'none'); else closeProject(true);
-  });
-  addEventListener('keydown', e => { if (e.key === 'Escape') closeProject(); });
-
   // capture phase: runs before the page-transition handler below
   document.addEventListener('click', e => {
     const a = e.target.closest('a'); if (!a || e.metaKey || e.ctrlKey || e.shiftKey || a.target === '_blank') return;
     const href = a.getAttribute('href') || '';
     if (a.closest('.rail.drag')) { e.preventDefault(); e.stopPropagation(); return; }
-    if (!ON_HOME) return;
-    const m = href.match(/^([a-z0-9-]+)\.html$/);
-    if (m && slugs.has(m[1])) { e.preventDefault(); e.stopPropagation(); openProject(m[1], isOpen() ? 'replace' : 'push'); return; }
-    if (href.startsWith('#') && href.length > 1) {
-      const id = href.slice(1);
-      if (id !== 'top' && !document.getElementById(id)) return;
-      e.preventDefault(); e.stopPropagation();
-      setMenu(false); closeProject();
-      setTimeout(() => goTo(id), isOpen() ? 50 : 0);
-    }
+    if (!ON_HOME || !href.startsWith('#') || href.length < 2) return;
+    const id = href.slice(1);
+    if (id !== 'top' && !document.getElementById(id)) return;
+    e.preventDefault(); e.stopPropagation(); setMenu(false); goTo(id);
   }, true);
 
-  // arriving with a hash: a project opens in the panel, a section scrolls into place
+  // arriving with a hash: old project links go to the project page, sections scroll into place
   if (ON_HOME && location.hash.length > 1) {
     const h = decodeURIComponent(location.hash.slice(1));
-    if (slugs.has(h)) openProject(h, 'none');
+    if (D.projects.some(p => p.slug === h)) location.replace(h + '.html');
     else addEventListener('load', () => goTo(h, true));
   }
 
   /* ---------- load + page transitions ---------- */
-  const start = () => requestAnimationFrame(() => { document.documentElement.classList.add('ready', 'go'); });
+  const start = () => requestAnimationFrame(() => { document.documentElement.classList.add('ready', 'go'); dispatchEvent(new Event('ry-go')); });
   (document.fonts && document.fonts.ready ? Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 1800))]) : Promise.resolve()).then(() => setTimeout(start, 120));
 
   const VT = window.CSS && CSS.supports && CSS.supports('view-transition-name', 'none');

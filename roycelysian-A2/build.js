@@ -18,6 +18,15 @@ const PAGES = {
   'index.html': { slug: '', name: 'Home', img: 'zeryab-pool',
     title: 'Roycelysian — Luxury Branding, Photography & Editorial Design Studio',
     desc: 'Creative studio for photography, branding and editorial design for exceptional properties, hotels and premium brands in Jordan, Saudi Arabia and beyond.' },
+  'work.html': { slug: 'work', name: 'Work', img: 'nal-pool',
+    title: 'Selected Work — Hospitality & Architectural Projects | Roycelysian',
+    desc: 'Private estates, resorts and residences in Marrakech, Ibiza, Amman and Saudi Arabia, told through photography and brand identity by Roycelysian.' },
+  'publications.html': { slug: 'publications', name: 'Publications', img: 'riad-library',
+    title: 'Luxury Coffee Table Books & Architectural Monographs | Roycelysian',
+    desc: 'Bespoke coffee table books, architectural monographs, property books and brand books, from concept and photography to design and fine print production.' },
+  'studio.html': { slug: 'studio', name: 'Studio', img: 'lazure-hall',
+    title: 'Studio — A Creative Studio for Exceptional Places | Roycelysian',
+    desc: 'Roycelysian is a boutique creative studio in Amman for photography, branding and editorial design, with work across Morocco, Spain, Saudi Arabia and Jordan.' },
   '404.html': { noindex: true, title: 'Page not found — Roycelysian', desc: 'This page could not be found.', img: 'zeryab-arches' },
   'project.html': { noindex: true, title: 'Project — Roycelysian', desc: 'A Roycelysian case study.', img: 'zeryab-pool' }
 };
@@ -81,6 +90,7 @@ const common = html => html
   .replace(/<script src="js\/main\.js"><\/script>/, m => html.includes('js/render.js') ? m : `<script src="js/render.js"></script>\n${m}`);
 
 // ---------- main pages ----------
+const cover0 = D.projects.find(p => p.slug === D.slides[0]).cover;
 for (const [file, p] of Object.entries(PAGES)) {
   let html = common(read(file));
   const canonical = p.noindex ? null : `${DOMAIN}/${p.slug}`;
@@ -90,13 +100,11 @@ for (const [file, p] of Object.entries(PAGES)) {
        crumbs([['Home', `${DOMAIN}/`], [p.name, canonical]])];
   html = setHead(html, head({ ...p, canonical, ld }));
   if (file === 'index.html') {
-    html = region(html, 'heroSlides', R.heroSlides(D));
-    html = region(html, 'heroDots', R.heroDots(D));
-    html = region(html, 'heroCap', R.heroCap(D.hero[0]));
-    html = region(html, 'rail', R.rail(D));
+    html = region(html, 'slides', R.slides(D));
     html = region(html, 'expList', R.expList(D));
-    html = html.replace(/<link rel="preload" as="image"[^>]*>/, `<link rel="preload" as="image" href="${R.IMG(D.hero[0].img)}" imagesrcset="${R.IMG(D.hero[0].img, 1)} 1100w, ${R.IMG(D.hero[0].img)} 2400w" imagesizes="100vw" fetchpriority="high">`);
+    html = html.replace(/<link rel="preload" as="image"[^>]*>/, `<link rel="preload" as="image" href="${R.IMG(cover0)}" imagesrcset="${R.IMG(cover0, 1)} 1100w, ${R.IMG(cover0)} 2400w" imagesizes="100vw" fetchpriority="high">`);
   }
+  if (file === 'work.html') html = region(html, 'workList', R.workList(D));
   write(file, html);
 }
 

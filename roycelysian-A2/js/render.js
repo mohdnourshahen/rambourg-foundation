@@ -18,6 +18,16 @@
   const heroDots = D => D.hero.map((_, i) => `<button class="${i ? '' : 'on'}" aria-label="Show slide ${i + 1}"></button>`).join('');
   const heroCap = s => `<span class="label dim">${esc(s.place)}</span><span class="serif">${esc(s.caption)}</span>`;
 
+  const GIF = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAAAAQABAAACAUwAOw==';
+  const slides = D => { const n = D.slides.length; return D.slides.map((slug, i) => {
+    const p = D.projects.find(x => x.slug === slug), role = p.brand ? 'Photography · Brand Identity' : p.scope[0];
+    const img = i ? `src="${GIF}" data-${IMGS(p.cover).replace(/ (srcset|sizes)=/g, ' data-$1=')}` : `${IMGS(p.cover)} fetchpriority="high"`;
+    return `<figure class="slide${i ? '' : ' is-on'}" data-i="${i}" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${n}: ${esc(p.name)}">
+      <img ${img} alt="${esc(p.name)}, ${esc(p.place)}">
+      <div class="s-cap"><span class="label s-place">${String(i + 1).padStart(2, '0')} — ${esc(p.place)}</span>
+        <h2 class="s-name">${esc(p.name)}</h2><p class="s-line">${esc(p.line)}</p>
+        <div class="s-foot"><span class="label dim s-role">${esc(role)}</span><a class="btn ghost" href="${url(p)}"><span>View project</span><i></i></a></div></div></figure>`; }).join(''); };
+
   const rail = D => D.projects.map(card).join('') + '<span class="rail-end"></span>';
   const expList = D => D.expertise.map(e => `<article class="exp-col rv">
       <button class="exp-btn" type="button" aria-expanded="false" aria-controls="exp-${e.slug}">
@@ -75,5 +85,5 @@
       <div><span class="label">Next project</span><span class="display" style="font-size:clamp(40px,6vw,96px)">${esc(nx.name)}</span><span class="label dim">${esc(nx.place)}</span></div></a>`;
   };
 
-  root.RYR = { esc, IMG, IMGS, url, card, heroSlides, heroDots, heroCap, rail, expList, workList, project };
+  root.RYR = { esc, IMG, IMGS, url, slides, card, heroSlides, heroDots, heroCap, rail, expList, workList, project };
 })(typeof window !== 'undefined' ? window : globalThis);

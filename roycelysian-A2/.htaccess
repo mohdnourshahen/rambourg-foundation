@@ -12,11 +12,10 @@ RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
 RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
 
-# One-page site: old pages and old WordPress URLs -> their section on the home page
-RewriteRule ^(studio|about)(\.html)?/?$ /#studio [NE,L,R=301]
-RewriteRule ^(work|our-gallery|art-design)(\.html)?/?$ /#work [NE,L,R=301]
+# Old WordPress URLs and merged pages -> new places
+RewriteRule ^about/?$ /studio [L,R=301]
+RewriteRule ^(our-gallery|art-design)/?$ /work [L,R=301]
 RewriteRule ^expertise(\.html)?/?$ /#expertise [NE,L,R=301]
-RewriteRule ^publications(\.html)?/?$ /#publications [NE,L,R=301]
 RewriteRule ^(contact|contacts)(\.html)?/?$ /#contact [NE,L,R=301]
 RewriteRule ^(shop|shop-2|cart|checkout|my-account|news|buy-tickets)(/.*)?$ / [L,R=301]
 RewriteRule ^(wp-admin|wp-login\.php|xmlrpc\.php|feed)(/.*)?$ / [L,R=301]

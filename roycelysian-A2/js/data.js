@@ -18,6 +18,9 @@ window.RY = {
     { img: 'riad-garden', caption: 'Riad Elhob', place: 'Marrakech, Morocco' }
   ],
 
+  // home slideshow, in order
+  slides: ['zeryab-estates', 'royal-lazure', 'skyline-residences', 'nal-vila'],
+
   projects: [
     {
       slug: 'zeryab-estates',
