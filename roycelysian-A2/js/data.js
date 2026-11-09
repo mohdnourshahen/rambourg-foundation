@@ -23,7 +23,7 @@ window.RY = {
     { slug: 'zeryab-estates', imgs: ['zeryab-pool', 'zeryab-gate', 'zeryab-suite'] },
     { slug: 'royal-lazure', imgs: ['lazure-hall', 'lazure-salon'] },
     { slug: 'riad-elhob', imgs: ['riad-lounge', 'riad-dining', 'riad-bedroom'] },
-    { slug: 'skyline-residences', imgs: ['skyline-living', 'skyline-dining', 'skyline-sofa'] },
+    { slug: 'skyline-residences', imgs: ['skyline-living', 'skyline-dining', 'skyline-lounge'] },
     { slug: 'nal-vila', imgs: ['nal-terrace', 'nal-pool'] }
   ],
 
@@ -124,7 +124,9 @@ window.RY = {
       gallery: [
         { img: 'skyline-dining', f: 'wide', alt: 'Dining room with floor-to-ceiling windows over Amman, The Skyline Residences' },
         { img: 'skyline-sofa', f: 'half', alt: 'Living room with curved sofa and city views, The Skyline Residences, Amman' },
-        { img: 'skyline-table', f: 'half', alt: 'Dining table set before a panoramic view of Amman' }
+        { img: 'skyline-table', f: 'half', alt: 'Dining table set before a panoramic view of Amman' },
+        { img: 'skyline-window', f: 'half', alt: 'Resident standing by the floor-to-ceiling window above Amman, The Skyline Residences' },
+        { img: 'skyline-lounge', f: 'half', alt: 'Relaxing on the sofa with Amman beyond the window, The Skyline Residences' }
       ]
     },
     {
