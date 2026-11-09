@@ -19,11 +19,14 @@
   const heroCap = s => `<span class="label dim">${esc(s.place)}</span><span class="serif">${esc(s.caption)}</span>`;
 
   const GIF = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAAAAQABAAACAUwAOw==';
-  const slides = D => { const n = D.slides.length; return D.slides.map((slug, i) => {
-    const p = D.projects.find(x => x.slug === slug), role = p.brand ? 'Photography · Brand Identity' : p.scope[0];
-    const img = i ? `src="${GIF}" data-${IMGS(p.cover).replace(/ (srcset|sizes)=/g, ' data-$1=')}` : `${IMGS(p.cover)} fetchpriority="high"`;
+  const slides = D => { const n = D.slides.length; return D.slides.map((s, i) => {
+    const p = D.projects.find(x => x.slug === s.slug), role = p.brand ? 'Photography · Brand Identity' : p.scope[0];
+    const alt = `${esc(p.name)}, ${esc(p.place)}`;
+    const imgs = (s.imgs || [p.cover]).map((k, j) => (i === 0 && j === 0)
+      ? `<img class="s-img is-on" ${IMGS(k)} fetchpriority="high" alt="${alt}">`
+      : `<img class="s-img${j ? '' : ' is-on'}" src="${GIF}" data-${IMGS(k).replace(/ (srcset|sizes)=/g, ' data-$1=')} alt="${j ? '' : alt}">`).join('');
     return `<figure class="slide${i ? '' : ' is-on'}" data-i="${i}" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${n}: ${esc(p.name)}">
-      <img ${img} alt="${esc(p.name)}, ${esc(p.place)}">
+      ${imgs}
       <div class="s-cap"><span class="label s-place">${String(i + 1).padStart(2, '0')} — ${esc(p.place)}</span>
         <h2 class="s-name">${esc(p.name)}</h2><p class="s-line">${esc(p.line)}</p>
         <div class="s-foot"><span class="label dim s-role">${esc(role)}</span><a class="btn ghost" href="${url(p)}"><span>View project</span><i></i></a></div></div></figure>`; }).join(''); };

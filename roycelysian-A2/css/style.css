@@ -892,3 +892,11 @@ body{font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.72}
 }
 .s-cap .label.dim{opacity:1}
 .open.st1 .open-foot,.open.st2 .open-title,.open.st2 .open-foot,.open.st2 .open-mono{pointer-events:none}
+
+/* A2.1 — several photos per project, bold place names */
+.slide img{transition:none}
+.slide .s-img{opacity:0;transform:translate(-50%,-50%) scale(1.07);transition:opacity 1.3s ease,transform 5.5s cubic-bezier(.2,.6,.3,1)}
+.slide .s-img.is-on{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.s-place{font-weight:700;font-size:12.5px;letter-spacing:.22em;color:var(--ivory);text-shadow:0 1px 14px rgba(0,0,0,.35)}
+.phero .label:first-child{font-weight:700;font-size:12px;letter-spacing:.2em}
+@media (max-width:720px){.s-place{font-size:11px;letter-spacing:.18em}}

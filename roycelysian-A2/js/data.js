@@ -19,7 +19,12 @@ window.RY = {
   ],
 
   // home slideshow, in order
-  slides: ['zeryab-estates', 'royal-lazure', 'skyline-residences', 'nal-vila'],
+  slides: [
+    { slug: 'zeryab-estates', imgs: ['zeryab-pool', 'zeryab-gate', 'zeryab-salon'] },
+    { slug: 'royal-lazure', imgs: ['lazure-hall', 'lazure-salon'] },
+    { slug: 'skyline-residences', imgs: ['skyline-living', 'skyline-dining', 'skyline-sofa'] },
+    { slug: 'nal-vila', imgs: ['nal-terrace', 'nal-pool'] }
+  ],
 
   projects: [
     {

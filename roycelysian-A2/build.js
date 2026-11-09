@@ -90,7 +90,7 @@ const common = html => html
   .replace(/<script src="js\/main\.js"><\/script>/, m => html.includes('js/render.js') ? m : `<script src="js/render.js"></script>\n${m}`);
 
 // ---------- main pages ----------
-const cover0 = D.projects.find(p => p.slug === D.slides[0]).cover;
+const cover0 = (D.slides[0].imgs || [])[0] || D.projects.find(p => p.slug === D.slides[0].slug).cover;
 for (const [file, p] of Object.entries(PAGES)) {
   let html = common(read(file));
   const canonical = p.noindex ? null : `${DOMAIN}/${p.slug}`;

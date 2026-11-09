@@ -88,22 +88,29 @@
     hero.classList.add('notrans'); geo(); void hero.offsetWidth; requestAnimationFrame(() => hero.classList.remove('notrans'));
     addEventListener('resize', () => { hero.classList.add('notrans'); geo(); requestAnimationFrame(() => hero.classList.remove('notrans')); });
 
-    // slideshow
-    let si = 0, timer = null, paused = false, started = false;
-    const bar = $('#sBar'), cur = $('#sCur'), DUR = 6000;
+    // slideshow: each project shows its photos (3.5s each), then moves to the next project
+    let si = 0, ii = 0, timer = null, paused = false, started = false;
+    const bar = $('#sBar'), cur = $('#sCur'), IMG_MS = 3500;
+    const imgsOf = k => $$('.s-img', S[k]);
     const wake = im => { if (im && im.dataset.src) { im.sizes = im.dataset.sizes; im.srcset = im.dataset.srcset; im.src = im.dataset.src; im.removeAttribute('data-src'); } };
-    const runBar = () => {
-      bar.style.transition = 'none'; bar.style.transform = 'scaleX(0)'; void bar.offsetWidth;
-      if (!paused) { bar.style.transition = `transform ${DUR}ms linear`; bar.style.transform = 'scaleX(1)'; }
+    const runBar = (from, ms) => {
+      bar.style.transition = 'none'; bar.style.transform = `scaleX(${from})`; void bar.offsetWidth;
+      if (!paused) { bar.style.transition = `transform ${ms}ms linear`; bar.style.transform = 'scaleX(1)'; }
     };
-    const tick = () => { clearTimeout(timer); runBar(); if (!paused) timer = setTimeout(() => show(si + 1), DUR); };
+    const step = () => {
+      const im = imgsOf(si);
+      if (ii < im.length - 1) { im[ii].classList.remove('is-on'); ii++; im[ii].classList.add('is-on'); wake(im[ii + 1]); clearTimeout(timer); if (!paused) timer = setTimeout(step, IMG_MS); }
+      else show(si + 1);
+    };
+    const tick = () => { clearTimeout(timer); const n = imgsOf(si).length; runBar(ii / n, (n - ii) * IMG_MS); if (!paused) timer = setTimeout(step, IMG_MS); };
     const show = n => {
-      S[si].classList.remove('is-on'); si = (n + N) % N;
-      wake($('img', S[si])); S[si].classList.add('is-on'); wake($('img', S[(si + 1) % N]));
+      S[si].classList.remove('is-on'); si = (n + N) % N; ii = 0;
+      const im = imgsOf(si); im.forEach((x, j) => x.classList.toggle('is-on', j === 0));
+      wake(im[0]); wake(im[1]); S[si].classList.add('is-on'); wake(imgsOf((si + 1) % N)[0]);
       cur.textContent = String(si + 1).padStart(2, '0');
       if (started) tick();
     };
-    const play = () => { started = true; wake($('img', S[1 % N])); tick(); };
+    const play = () => { started = true; const im = imgsOf(0); wake(im[1]); wake(imgsOf(1 % N)[0]); tick(); };
     $('#sNext').onclick = () => started && show(si + 1);
     $('#sPrev').onclick = () => started && show(si - 1);
     if (matchMedia('(hover:hover)').matches) {
