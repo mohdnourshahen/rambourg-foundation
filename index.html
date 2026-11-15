@@ -262,7 +262,7 @@
       </article>`).join(""));
     document.getElementById("hnews").innerHTML = RF.news.slice(0, 3).map(n => `
       <a class="ncard" href="journal/${n.slug}/" data-reveal>
-        <div class="ncard__img"><img src="${n.img}" alt="${n.title}" loading="lazy"></div>
+        <div class="ncard__img"><img src="${n.img}" alt="${n.title}" loading="lazy"${n.imgPos ? ` style="object-position:${n.imgPos}"` : ""}>${n.partner ? `<span class="cobadge"><span>×</span><img src="${n.partner[1]}" alt="${n.partner[0]}"></span>` : ""}</div>
         <div class="ncard__meta"><span>${n.cat}</span><span>${n.date}</span></div>
         <h3><span>${n.title}</span></h3>
         <p class="ncard__dek">${n.excerpt}</p>

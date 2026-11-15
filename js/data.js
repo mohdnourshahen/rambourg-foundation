@@ -124,7 +124,19 @@ window.RF = {
   // Voice: first person ("we"), the person before the foundation, short and specific.
   // Each story: cat (type), pillar (slug), dek, 3 short paragraphs, a real quote, a captioned photo.
   // Optional: photos [[src, caption]], gallery (key in RF), video, youtube, link [label, url].
+  // A story can carry a partner: [name, logo, url]. It shows a co-branding strip on the story and a badge on its cards.
   news: [
+    { slug: "patriotic-millionaires-partnership", cat: "Partnership", pillar: "human-rights", date: "Nov 2026",
+      img: "assets/img/events/patriotic-millionaires-2026.jpg", imgPos: "50% 12%", imgCap: "Sarah and Guillaume Rambourg with members of the Patriotic Millionaires",
+      title: "A three-year partnership with the Patriotic Millionaires",
+      excerpt: "We will fund the Patriotic Millionaires for three years and advocate together for a fairer economy.",
+      body: [
+        "We are proud to announce a new three-year partnership to fund the Patriotic Millionaires. Our work is driven by social justice, reducing inequality and building a more equitable world, and we believe true progress starts with expanding opportunity and restoring fairness to the global economic system.",
+        "The relationship began in 2021, over a lunch in New York City with Abigail Disney. In that conversation our Founder and President found a shared vision and purpose, and a collaboration grew from it. The Patriotic Millionaires were founded in 2012 by Erica Payne, in response to excessive tax breaks for the ultra-wealthy in the United States. Their first goal was to make sure the top 0.01% pay their fair share of taxes. Over the years that fight for fiscal justice has widened into a broader mandate for social justice, including minimum living standards for all Americans, at a time when the US federal minimum wage is still $7.25 an hour.",
+        "Significant progress has been made. Extreme inequality, social mobility and affordability are now central to political debate in the United States and around the world, and the G20 has put the taxation of billionaires on the agenda of international finance ministers. Challenges remain: the proposed 5% billionaire tax in California and the Zucman tax in the French Parliament have both faced setbacks. The movement is growing to meet them, with new Patriotic Millionaires chapters in the UK, Canada and France. A fairer world is not just an ideal. It is an inevitability, and together we will work for a future where everyone has the opportunity to thrive."
+      ],
+      partner: ["Patriotic Millionaires", "assets/img/partners/patriotic-millionaires.png", "https://patrioticmillionaires.org/"],
+      link: ["The announcement on Instagram", "https://www.instagram.com/p/Dfsfft9o_ls/"] },
     { slug: "ranim-al-halaky-delfina-residency", cat: "Residency", pillar: "arts", date: "May 2026",
       img: "assets/img/events/delfina-visit-2026.jpg", imgCap: "Ranim AlHalaky with our President, Sarah Rambourg, at Delfina Foundation, London",
       title: "Ranim AlHalaky completes her residency at Delfina Foundation",
@@ -202,6 +214,7 @@ window.RF = {
 
   // From Instagram: [kind, image or text, caption, post url, date] — update by hand, newest first.
   instagram: [
+    ["img", "assets/img/events/patriotic-millionaires-2026.jpg", "A three-year partnership with the Patriotic Millionaires", "https://www.instagram.com/p/Dfsfft9o_ls/", "Nov 2026"],
     ["text", "“Accountability is not optional. It is the foundation of justice.”", "On the lives of children like Hind Rajab", "https://www.instagram.com/p/DVycBX1EZUB/", "Mar 2026"],
     ["img", "assets/img/events/delfina-visit-2026.jpg", "Our President visits Ranim AlHalaky at Delfina Foundation", "https://www.instagram.com/p/DUYthCqDBhj/", "Feb 2026"],
     ["img", "assets/img/insta/dc.jpg", "An emotional night in Washington DC", "https://www.instagram.com/p/DUHO8kLk-oV/", "Jan 2026"],

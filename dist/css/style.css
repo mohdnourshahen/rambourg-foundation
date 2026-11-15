@@ -977,3 +977,21 @@ em { color: var(--blue); }
 
 /* home hero photo: keep Sarah and Guillaume centred in the tall phone frame */
 @media (max-width: 640px) { .hero__frame img[src*="founder-president-stage"] { object-position: 43% 50% !important; } }
+
+/* ============ CO-BRANDING (stories with a partner) ============ */
+.cobrand { display: flex; align-items: center; gap: 18px 28px; flex-wrap: wrap; margin-top: 34px; padding: 20px 26px; background: #fff; border: 1px solid var(--line); border-radius: 6px; width: fit-content; max-width: 100%; }
+.cobrand__label { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.cobrand__logos { display: flex; align-items: center; gap: 22px; }
+.cobrand__logos img { display: block; height: 46px; width: auto; }
+.cobrand__logos i { font-style: normal; font-weight: 300; font-size: 30px; line-height: 1; color: var(--muted); }
+.cobrand__logos a { transition: opacity .3s; }
+.cobrand__logos a:hover { opacity: .75; }
+.ncard__img, .nfeat__img { position: relative; }
+.cobadge { position: absolute; left: 12px; bottom: 12px; z-index: 1; display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; background: #fff; border-radius: 999px; box-shadow: 0 6px 20px rgba(0,0,0,.15); font-size: 13px; color: var(--muted); }
+.cobadge img { height: 20px !important; width: auto !important; object-fit: contain; transform: none !important; }
+@media (max-width: 640px) {
+  .cobrand { padding: 16px 18px; gap: 12px; }
+  .cobrand__logos { gap: 14px; }
+  .cobrand__logos img { height: 34px; }
+  .cobrand__logos i { font-size: 24px; }
+}

@@ -43,6 +43,10 @@
         <h1 data-split>${a.title}</h1>
         <p class="ahead__dek">${a.excerpt}</p>
         <p class="ahead__meta"><span>${a.cat}</span><span>${a.date}</span>${pil ? `<a class="tag" href="pillars/${pil.slug}/" style="--c:${pil.color}">${pil.name}</a>` : ""}</p>
+        ${a.partner ? `<div class="cobrand" data-reveal>
+          <span class="cobrand__label">In partnership with</span>
+          <div class="cobrand__logos"><img src="assets/logo/RF_MasterLogo_C.svg" alt="Rambourg Foundation"><i aria-hidden="true">×</i><a href="${a.partner[2]}" target="_blank" rel="noopener"><img src="${a.partner[1]}" alt="${a.partner[0]}"></a></div>
+        </div>` : ""}
       </header>
 
       <div class="hero__media" data-theme="dark">
@@ -71,7 +75,7 @@
         <div class="news__head"><h2 data-split>More from the <em>journal</em></h2><a class="btn btn--line" href="news.html">The journal</a></div>
         <div class="news__grid">${more.map(n => `
           <a class="ncard" href="journal/${n.slug}/" data-reveal>
-            <div class="ncard__img"><img src="${n.img}" alt="${n.title}" loading="lazy"></div>
+            <div class="ncard__img"><img src="${n.img}" alt="${n.title}" loading="lazy"${n.imgPos ? ` style="object-position:${n.imgPos}"` : ""}>${n.partner ? `<span class="cobadge"><span>×</span><img src="${n.partner[1]}" alt="${n.partner[0]}"></span>` : ""}</div>
             <div class="ncard__meta"><span>${n.cat}</span><span>${n.date}</span></div>
             <h3><span>${n.title}</span></h3>
           </a>`).join("")}
